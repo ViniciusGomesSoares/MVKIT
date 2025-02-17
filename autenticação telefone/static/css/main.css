@@ -1,0 +1,24 @@
+body {
+    background-color: #fee5d5;
+}
+
+header img {
+    width: 100px;
+}
+.container-box {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 10vh;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.code-input {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 24px;
+    margin: 5px;
+}
