@@ -15,3 +15,25 @@ def armazenar():
         return redirect("/sucesso")
     else:
         print("falhou :(") 
+
+
+
+#### ROTA
+from flask import Flask, render_template, redirect, flash
+from cadastro import criar_bp_cad, dados_cadastro
+from armazem import armz
+
+app = Flask(__name__)
+
+app.register_blueprint(criar_bp_cad)
+app.register_blueprint(armz)
+
+
+class Routes():
+    @app.route("/")
+    def cad():
+        return render_template("index.html")
+    
+    @app.route("/sucesso")
+    def sucesso():
+        return render_template("sucesso.html", data=dados_cadastro)
