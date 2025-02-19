@@ -1,0 +1,11 @@
+.logo{
+    width: 100px;
+}
+
+.c1{
+    background-color: var(--color-primary)!important;
+}
+
+.c1-text{
+    color: var(--color-basic)!important;
+}
