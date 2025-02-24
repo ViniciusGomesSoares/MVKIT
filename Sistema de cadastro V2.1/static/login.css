@@ -10,21 +10,37 @@ body {
     
 }
 
+a{
+    text-decoration: none;
+}
+
 header img{
     width: 100px;
 }
 
-a{
-    text-decoration: none;
+.users{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: solid 2px var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    position: relative;
+    right: 25px;
+}
+.users a span{
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+
+.link{
     color: var(--color-primary);
     font-weight: 600;
     font-size: 16px;
 }
 
-.help{
-    border: solid 1px var(--color-primary);
-    border-radius: 100%;
-}
 .container {
     display: flex;
     justify-content: space-around;
@@ -44,6 +60,7 @@ a{
     bottom: 0;
     right: 0;
     left: 0;
+    z-index: -1;
 }
 
 .box1 {
@@ -84,6 +101,11 @@ span .icon{
     align-items: center;
 }
 
+.flex3{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .box2 {
     width: 500px;
     height:400px;
@@ -284,3 +306,11 @@ span .icon{
     /* BORDER */
     --border-gray:#DADCE0;
 }
+
+
+
+/* Classes uteis */
+
+
+
+/* FIM */
