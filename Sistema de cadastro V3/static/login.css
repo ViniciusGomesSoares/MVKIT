@@ -7,15 +7,17 @@ body {
     background-image: url("../static/Ellipse\ 1.png");
     background-repeat: no-repeat;
     background-size: 45%;
-    
-}
-
-a{
-    text-decoration: none;
 }
 
 header img{
     width: 100px;
+}
+
+a{
+    text-decoration: none;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 16px;
 }
 
 .users{
@@ -35,12 +37,10 @@ header img{
     color: var(--color-primary);
 }
 
-.link{
-    color: var(--color-primary);
-    font-weight: 600;
-    font-size: 16px;
+.help{
+    border: solid 1px var(--color-primary);
+    border-radius: 100%;
 }
-
 .container {
     display: flex;
     justify-content: space-around;
@@ -106,6 +106,7 @@ span .icon{
     justify-content: space-between;
     align-items: center;
 }
+
 .box2 {
     width: 500px;
     height:400px;
@@ -306,11 +307,3 @@ span .icon{
     /* BORDER */
     --border-gray:#DADCE0;
 }
-
-
-
-/* Classes uteis */
-
-
-
-/* FIM */

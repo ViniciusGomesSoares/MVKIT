@@ -1,12 +1,14 @@
 from flask import Blueprint, request, redirect, url_for, flash   # type: ignore
 from pymongo import MongoClient # type: ignore
 
+
 criar_bp_cad = Blueprint("cadastrar", __name__, template_folder="templates")
 cliente = MongoClient("localhost", 27017)
 
 db = cliente.database_Mvkit 
 
 table = db.usuario
+
 
 @criar_bp_cad.route("/cadastrar", methods=["POST"])
 def cadastro():
@@ -34,5 +36,19 @@ def cadastronum():
     return redirect("/")
 
 
+@criar_bp_cad.route("/update", methods=["POST"])
+def update():
+    email = request.form["email"]
+    usuario_existente = table.find_one({"email": email})
+    email_novo = request.form["email_edit"]
+
+    if usuario_existente:
+        table.update_one(
+            {"email": email},
+            {"$set": {"email": email_novo}}
+        )
+    else:
+        table.insert_one({'email': email_novo})
 
 
+    return redirect("/perfil")

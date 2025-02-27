@@ -7,13 +7,11 @@ body {
     background-image: url("../static/Ellipse\ 1.png");
     background-repeat: no-repeat;
     background-size: 45%;
+}
 
-}
-header {
-    padding: 8px;
-}
 header img {
     width: 100px;
+    margin: 8px;
 }
 .card-custom {
     background: white;
