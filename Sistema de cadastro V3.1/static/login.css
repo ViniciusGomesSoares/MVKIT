@@ -285,17 +285,26 @@ span .icon{
     justify-content: center;
 }
 
-.email2 input {
-    width: 20px;
-    height: 23px;
+/* tela de sms */
+
+.sms div{
+    display: flex;
+    justify-content: space-around;
+}
+
+.sms input {
+    width: 15px;
+    height: 25px;
     margin-right: 13px;
     padding: 10px 15px;
     align-items: center;
     border: 1px solid var(--border-gray);
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 23px;
     text-align: center;
 }
+
+
 :root{
     /* FONTS */
     --poppins: font-family: "Poppins", serif;
