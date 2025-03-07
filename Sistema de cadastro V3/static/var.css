@@ -1,0 +1,11 @@
+:root{
+    /* FONTS */
+    --poppins: font-family: "Poppins", serif;
+    /* COLORS */
+    --color-basic:#FFF;
+    --color-primary:#EC8A4D;
+    --color-secondary:#414143;
+    --color-terciary:#717171;
+    /* BORDER */
+    --border-gray:#DADCE0;
+}
