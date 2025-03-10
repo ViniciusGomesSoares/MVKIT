@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: "Poppins", serif;
+    font-weight: 300;
+    font-style: normal;
+    background-image: url("../static/Ellipse\ 1.png");
+    background-repeat: no-repeat;
+    background-size: 45%;
+}
+
+header img {
+    width: 100px;
+    margin: 8px;
+}
+.card-custom {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 20%;
+}
+.btn-whatsapp {
+    background-color: #E87D42;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+}
+.btn-whatsapp:hover {
+    background-color: #d56b34;
+}
+.input-group-text {
+    background-color: #E8E8E8;
+    border: none;
+}
+.help-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
