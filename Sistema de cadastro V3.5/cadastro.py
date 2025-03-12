@@ -1,11 +1,16 @@
-from flask import Blueprint, request, redirect, url_for, flash   # type: ignore
+from flask import Blueprint, request, redirect, url_for, flash, session   # type: ignore
 from pymongo import MongoClient # type: ignore
+from bson.objectid import ObjectId # type: ignore
+import random
 
 
 criar_bp_cad = Blueprint("cadastrar", __name__, template_folder="templates")
 cliente = MongoClient("localhost", 27017)
 
 db = cliente.database_Mvkit 
+
+def gerar_senha():
+    return str(random.randint(100000, 999999))
 
 table = db.usuario
 
@@ -14,13 +19,20 @@ table = db.usuario
 def cadastro():
     email = request.form["email"]
     usuario_existente = table.find_one({"email": email})
+    nova_senha = gerar_senha()
     if usuario_existente:  
         print("Email já cadastrado")
-        return redirect("/") 
-    table.insert_one({'email': email})
+        session.clear()
+        session['email'] = email
+        session['senha'] = str(nova_senha)
+        return redirect("/sms") 
+    email_id = table.insert_one({'email': email, 'senha': nova_senha}).inserted_id
+    session.clear()
+    session['senha'] = str(nova_senha)
+    session['usuario_id'] = str(email_id)
+    session['email'] = email
     print("sucesso")
-    
-    return redirect("/")
+    return redirect("/sms")
 
 
 
@@ -28,12 +40,20 @@ def cadastro():
 def cadastronum():
     numero = request.form["numero"]
     usuario_existente = table.find_one({"numero": numero})
+    nova_senha = gerar_senha()
     if usuario_existente:
         print("Número já cadastrado")
-        return redirect("/")  
-    table.insert_one({"numero": numero})
+        session.clear()
+        session['numero'] = numero
+        session['senha'] = str(nova_senha)
+        return redirect("/sms")  
+    numero_id = table.insert_one({"numero": numero, 'senha': nova_senha}).inserted_id
+    session.clear()
+    session['senha'] = str(nova_senha)
+    session['usuario_id'] = str(numero_id)
+    session['numero'] = numero
     print("Cadastro realizado com sucesso")
-    return redirect("/")
+    return redirect("/sms")
 
 
 @criar_bp_cad.route("/update", methods=["POST"])
@@ -48,7 +68,7 @@ def update():
             {"$set": {"email": email_novo}}
         )
     else:
-        table.insert_one({'email': email_novo})
+        return redirect('/')
 
 
     return redirect("/perfil")
