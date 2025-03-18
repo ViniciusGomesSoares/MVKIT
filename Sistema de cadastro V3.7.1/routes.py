@@ -1,11 +1,11 @@
 from flask import Flask, render_template, redirect, url_for, flash, session # type: ignore
-from cadastro import criar_bp_cad, table
-from bson.objectid import ObjectId # type: ignore
-import os
 from authlib.integrations.flask_client import OAuth # type: ignore
-import secrets
+from cadastro import criar_bp_cad, table
 from endereco import endereco_local
+from bson.objectid import ObjectId # type: ignore
 from dotenv import load_dotenv
+import secrets
+import os
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY') or os.urandom(24)
@@ -19,8 +19,6 @@ app.config["FACEBOOK_CLIENT_ID"] = os.getenv('FACEBOOK_CLIENT_ID')
 app.config["FACEBOOK_CLIENT_SECRET"] = os.getenv('FACEBOOK_CLIENT_SECRET')
 app.config["GOOGLE_CLIENT_ID"] = os.getenv('GOOGLE_CLIENT_ID')
 app.config["GOOGLE_CLIENT_SECRET"] = os.getenv('GOOGLE_CLIENT_SECRET')
-
-
 
 
 oauth = OAuth(app)
