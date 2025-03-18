@@ -74,5 +74,4 @@ def deleter_dados():
         return redirect('/')
     else:
         print('Erro não foi encontado nenhuma informação para ser deletada')
-    
 
