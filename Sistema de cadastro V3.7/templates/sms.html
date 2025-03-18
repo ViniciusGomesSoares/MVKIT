@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NhamNham</title>
+
+    <link rel="stylesheet" href="../static/var.css">
+    <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/logo2.png">
+    <link rel="stylesheet" href="../static/cardsms.css">
+
+
+</head>
+
+<body>
+    <header>
+        <img src="../static/logo2.png" alt="Logo" style="z-index: 100;">
+    </header>
+    
+    <section class="container coluna" style="z-index: 10;">
+        <div>
+            <div class="flex">
+                <div class="box3">
+                    <div class="content2">
+                        <h2>Digite o código de 6 Dígitos que enviamos por<br> WhatsApp para o:</h2>
+                        <p>(55) 11 99999-9999</p>
+                    </div>
+
+                    <form class="sms" method="post" action="/auth">
+                        <div>
+                            
+                            <input type="text" name="sms1" id="#" minlength="1" maxlength="1" placeholder="0" required pattern="[0-9]" required>
+                            <input type="text" name="sms2" id="#" minlength="1" maxlength="1" placeholder="0" required pattern="[0-9]" required>
+                            <input type="text" name="sms3" id="#" minlength="1" maxlength="1" placeholder="0" required pattern="[0-9]" required>
+
+                            <input type="text" name="sms4" id="#" minlength="1" maxlength="1" placeholder="0" required pattern="[0-9]" required>
+                            <input type="text" name="sms5" id="#" minlength="1" maxlength="1" placeholder="0" required pattern="[0-9]" required>
+                            <input type="text" name="sms6" id="#" minlength="1" maxlength="1" placeholder="0" required pattern="[0-9]" required>
+
+                        </div>
+                        <button class="form-btn4" type="submit">
+                            <span>Continuar</span>
+                        </button>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="card" style="z-index: 10000;">
+        <div class="img"><img src="../static/image.png" alt=""></div>
+        <div class="textBox">
+          <div class="textContent">
+            <p class="h1">Ei sua senha chegou!</p>
+            
+          </div>
+          <p class="p">{{ senha }}</p>
+        <div>
+      </div></div></div>
+</body>
+
+</html>
