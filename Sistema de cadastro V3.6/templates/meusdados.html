@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Dados</title>
+    <link rel="stylesheet" href="/static/meusdados.css">
+    <link rel="stylesheet" href="/static/var.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/logo2.png">
+
+</head>
+<body>
+    <!-- {{ meusdados.endereco }} -->
+    <header>
+        <img src="/static/logo2.png" alt="Logo">
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/meusdados">Dados da conta</a>
+        </nav>
+
+    </header>
+
+    <section class="dados">
+        <h1>Meus Dados:</h1>
+        <p>Nome: {{ meusdados.endereco.name }}</p>
+        <p>cpf: {{ meusdados.endereco.cpf }}</p>
+        <p>Cep: {{ meusdados.endereco.cep }}</p>
+        <p>Bairro: {{ meusdados.endereco.bairro }}</p>
+        <p>Rua: {{ meusdados.endereco.rua }}</p>
+        <p>Cidade: {{ meusdados.endereco.cidade }}</p>
+        <p>Estado: {{ meusdados.endereco.estado }}</p>
+        <p>Numero: {{ meusdados.endereco.numero_casa }}</p>
+        <form action="/del_dados" method="POST" >
+            <button class="submit">
+                <p>Delete</p>
+            </button>
+        </form>
+    </section>
+</body>
+</html>
