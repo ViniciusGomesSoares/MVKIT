@@ -1,0 +1,41 @@
+#tab_container {
+    width: 50%;
+}
+#default-styled-tab-content {
+    width: 50%;
+}
+main section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+legend label {
+    position: absolute;
+    top: 85px;
+    left: 358px;
+    opacity: 50%;
+    border-radius: 50%;
+    transition: 0.2s ease-in-out;
+
+}
+legend label:hover {
+    opacity: 100%;
+    transition: 0.2s ease-in-out;
+}
+.form_container, .form_container form input {
+    flex-direction: column;
+    display: flex;
+    width: 100% !important;
+    justify-content: start;
+    align-items: start;
+}
+tr {
+    color: black !important;
+}
+.toggle-path {
+    position: relative;
+    left: -5px;
+}
