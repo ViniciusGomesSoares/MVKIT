@@ -115,7 +115,7 @@ class Routes():
         try:
             token = google.authorize_access_token()
             if not token:
-                return "Erro: Token não recebido", 400
+                return "Erro: Token não recebido", 500
 
             user_info = google.get("https://www.googleapis.com/oauth2/v2/userinfo").json()
             
@@ -141,3 +141,13 @@ class Routes():
         
         except Exception as e:
             return f"Erro no login: {str(e)}", 500
+        
+    @app.route("/admin_panel")
+    def admpanel():
+        return render_template("perfiladm.html")
+    @app.route("/produtos")
+    def produtos():
+        return render_template("produtos.html")
+    @app.route("/" + str(random.randint(100000, 999999)))
+    def base_adm():
+        return render_template("base_adm_profile.html")
