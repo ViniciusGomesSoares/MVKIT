@@ -21,29 +21,55 @@ def data():
             endereco = {"$set": {"endereco": local}}
             try:
                 if session.get('email'):
+                    session.pop('cep', None)
+                    session['cep'] = cep
                     table.update_one({"email": session['email']}, endereco)
                     return redirect('/')
                 elif session.get('numero'):
+                    session.pop('cep', None)
+                    session['cep'] = cep
                     table.update_one({"numero": session['numero']}, endereco)
                     print("Funcionou")
                     return redirect("/")
             except:
                 print("Erro")
     except:
-        if session['email'] or session['numero']:
-            local = {"name": name,"cpf": cpf,"cep": cep, "bairro": bairro, "rua": rua, "cidade": cidade, "estado": estado, "numero_casa": num_casa}
-            endereco = {"$set": {"endereco": local}}
-            try:
-                if session.get('email'):
-                    table.update_one({"email": session['email']}, endereco)
-                    return redirect('/')
-                elif session.get('numero'):
-                    table.update_one({"numero": session['numero']}, endereco)
-                    print("Funcionou")
-                    return redirect("/")
-            except:
-                print("Erro")
-
+        try:
+            if session['email']:
+                local = {"name": name,"cpf": cpf,"cep": cep, "bairro": bairro, "rua": rua, "cidade": cidade, "estado": estado, "numero_casa": num_casa}
+                endereco = {"$set": {"endereco": local}}
+                try:
+                    if session.get('email'):
+                        session.pop('cep', None)
+                        session['cep'] = cep
+                        table.update_one({"email": session['email']}, endereco)
+                        return redirect('/')
+                    elif session.get('numero'):
+                        session.pop('cep', None)
+                        session['cep'] = cep
+                        table.update_one({"numero": session['numero']}, endereco)
+                        print("Funcionou")
+                        return redirect("/")
+                except:
+                    print("Erro")
+        except:
+            if session['numero']:
+                local = {"name": name,"cpf": cpf,"cep": cep, "bairro": bairro, "rua": rua, "cidade": cidade, "estado": estado, "numero_casa": num_casa}
+                endereco = {"$set": {"endereco": local}}
+                try:
+                    if session.get('email'):
+                        session.pop('cep', None)
+                        session['cep'] = cep
+                        table.update_one({"email": session['email']}, endereco)
+                        return redirect('/')
+                    elif session.get('numero'):
+                        session.pop('cep', None)
+                        session['cep'] = cep
+                        table.update_one({"numero": session['numero']}, endereco)
+                        print("Funcionou")
+                        return redirect("/")
+                except:
+                    print("Erro")
 
 @endereco_local.route("/meusdados", methods=["GET"])
 def dataread():
@@ -73,6 +99,6 @@ def deleter_dados():
         table.update_one({'numero':session['numero']}, {'$unset':{"endereco":1}})
         return redirect('/')
     else:
-        print('Erro não foi encontado nenhuma informação para ser deletada')
+        print('Erro não foi encontrado nenhuma informação para ser deletada')
     
 

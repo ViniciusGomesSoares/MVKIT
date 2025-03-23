@@ -1,5 +1,0 @@
-flask
-pymongo
-dnspython
-Authlib
-requests

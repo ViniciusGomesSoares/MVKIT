@@ -26,7 +26,7 @@ def cadastro():
         session['email'] = email
         session['senha'] = str(nova_senha)
         return redirect("/sms") 
-    email_id = table.insert_one({'email': email, 'senha': nova_senha}).inserted_id
+    email_id = table.insert_one({'email': email}).inserted_id
     session.clear()
     session['senha'] = str(nova_senha)
     session['usuario_id'] = str(email_id)
@@ -47,7 +47,7 @@ def cadastronum():
         session['numero'] = numero
         session['senha'] = str(nova_senha)
         return redirect("/sms")  
-    numero_id = table.insert_one({"numero": numero, 'senha': nova_senha}).inserted_id
+    numero_id = table.insert_one({"numero": numero}).inserted_id
     session.clear()
     session['senha'] = str(nova_senha)
     session['usuario_id'] = str(numero_id)
@@ -72,3 +72,17 @@ def update():
 
 
     return redirect("/perfil")
+
+@criar_bp_cad.route("/delete_cad", methods=["POST"])
+def delete():
+    try:
+        if session['email']:
+            table.delete_one({"email": session['email']})
+            session.clear()
+            return redirect("/")
+        else:
+            table.delete_one({"numero": session['numero']})
+            session.clear()
+            return redirect("/")
+    except:
+        return redirect("/meusdados")
