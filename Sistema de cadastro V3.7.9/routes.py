@@ -94,8 +94,26 @@ class Routes():
         try:
             token = facebook.authorize_access_token()
             user_info = facebook.get("me?fields=id,name,email").json()
-            session["user"] = user_info  # armazenei o usuário na sessão
-            return redirect('/')  # isso exibe os dados (mudar para redirecionamento depois)
+            try:
+                if user_info:
+                    nova_senha = gerar_senha()
+                    session["user"] = user_info
+                    email_user = user_info['email']
+                    usuario_existente = table.find_one({"email": email_user})
+                    if usuario_existente:
+                        session.clear()
+                        session['senha'] = str(nova_senha)
+                        session['email'] = email_user
+                        return redirect('/sms')
+                    session.clear()
+                    session['senha'] = str(nova_senha)
+                    session['email'] = email_user
+                    table.insert_one({'email': email_user})
+                    return redirect("/sms")
+            except:
+                print("Erro ainda desconhecido")
+                return redirect('/')
+        
         except Exception as e:
             return f"Erro no login: {str(e)}", 500
         
