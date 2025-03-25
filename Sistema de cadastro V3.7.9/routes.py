@@ -28,12 +28,9 @@ facebook = oauth.register(
     name="facebook",
     client_id=app.config["FACEBOOK_CLIENT_ID"],
     client_secret=app.config["FACEBOOK_CLIENT_SECRET"],
-    authorize_url="https://www.facebook.com/dialog/oauth",
-    authorize_params={"scope": "email"},
-    access_token_url="https://graph.facebook.com/oauth/access_token",
-    access_token_params=None,
+    authorize_url="https://www.facebook.com/v12.0/dialog/oauth",
+    access_token_url="https://graph.facebook.com/v12.0/oauth/access_token",
     client_kwargs={"scope": "email"},
-    api_base_url="https://graph.facebook.com/",
 )
 
 google = oauth.register(

@@ -188,6 +188,7 @@ span .icon{
     color: var(--color-secondary);
     cursor: pointer;
     transition: 0.2s ease-in-out;
+    height: 55px;
 }
 .form-btn1:hover {
     color: red;
@@ -205,7 +206,7 @@ span .icon{
     border: 0 !important;
     outline: 0 !important;
     background: #4065B4;
-    color: var(--color-basic);
+    color: var(--color-secondary);
     cursor: pointer;
     transition: 0.2s ease-in-out;
     height: 55px;
