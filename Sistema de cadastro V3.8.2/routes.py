@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, session # type: ignore
+from flask import Flask, render_template, redirect, url_for, flash, session, send_file, Response # type: ignore
 from cadastro import criar_bp_cad, table
 from bson.objectid import ObjectId # type: ignore
 import os
@@ -8,12 +8,16 @@ from endereco import endereco_local
 from authy import authentic
 from dotenv import load_dotenv # type: ignore
 import random
+from cadrestaurante import bp_restauranteadmin, table_user
+import base64
+
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY') or os.urandom(24)
 
 app.register_blueprint(endereco_local)
 app.register_blueprint(criar_bp_cad)
 app.register_blueprint(authentic)
+app.register_blueprint(bp_restauranteadmin)
 
 load_dotenv()
 app.config["FACEBOOK_CLIENT_ID"] = os.getenv('FACEBOOK_CLIENT_ID')
@@ -78,10 +82,14 @@ class Routes():
     
     @app.route('/cadastro_local')
     def testel():
+        if 'email' not in session or 'numero' not in session:
+            return redirect('/login')
         return render_template("cadlocal.html")
     
     @app.route('/sms')
     def sms():
+        if 'email' not in session or 'numero' not in session:
+            return redirect('/login')
         notify = session['senha']
         return render_template("sms.html", senha = notify)
     
@@ -158,11 +166,32 @@ class Routes():
             return f"Erro no login: {str(e)}", 500
         
     @app.route("/admin_panel")
-    def admpanel():
-        return render_template("perfiladm.html")
+    def get_imagem():
+        if 'email' not in session:
+            return redirect('/login_restaurante')
+        usuario = table_user.find_one({"email": session['email']})
+        if not usuario or "imagem" not in usuario:
+            return render_template("perfiladm.html")
+        imagem_binaria = usuario["imagem"]
+        imagem_base64 = base64.b64encode(imagem_binaria).decode('utf-8')
+        return render_template("perfiladm.html", imagem_url=f"data:image/jpeg;base64,{imagem_base64}", email = usuario['email'])
+    
     @app.route("/produtos")
     def produtos():
+        if 'email' not in session or 'numero' not in session:
+            return redirect('/login_restaurante')
         return render_template("produtos.html")
+    
     @app.route("/" + str(random.randint(100000, 999999)))
     def base_adm():
         return render_template("base_adm_profile.html")
+    
+    @app.route("/login_restaurante")
+    def login_restaurante():
+        return render_template("loginRestaurante.html")
+    
+    @app.route("/gestao_restaurante")
+    def gestao_restaurante():
+        if 'email' not in session:
+            return redirect('/login_restaurante')
+        return render_template("gestao_restaurante.html")
