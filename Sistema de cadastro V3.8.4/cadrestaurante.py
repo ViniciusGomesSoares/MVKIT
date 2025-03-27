@@ -63,3 +63,30 @@ def cadastro_restaurante():
 def sair():
     session.clear()
     return redirect("/login_restaurante")
+
+@bp_restauranteadmin.route("/cadastrar_prod", methods=["POST"])
+def criar_produto():
+    nome = request.form["name"]
+    valor = request.form["valor"]
+    categoria = request.form["categoria"]
+    descricao = request.form["descricao"]
+    
+    img = request.files["file_img"]
+    if img.filename == "":
+        flash("Nenhuma imagem selecionada!", "error")
+        return redirect("/admin_panel")
+    imagem_bytes = Binary(img.read())
+    
+    produto = {
+        "nome": nome,
+        "valor": float(valor),
+        "categoria": categoria,
+        "descricao": descricao,
+        "imagem": imagem_bytes
+    }
+    table_user.update_one(
+        {"email": session["email"]},
+        {"$push": {"produtos": produto}},
+        upsert=True
+    )
+    return redirect("/produtos")
