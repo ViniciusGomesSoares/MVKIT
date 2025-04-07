@@ -82,14 +82,10 @@ class Routes():
     
     @app.route('/cadastro_local')
     def testel():
-        if 'email' not in session or 'numero' not in session:
-            return redirect('/login')
         return render_template("cadlocal.html")
     
     @app.route('/sms')
     def sms():
-        if 'email' not in session or 'numero' not in session:
-            return redirect('/login')
         notify = session['senha']
         return render_template("sms.html", senha = notify)
     
@@ -180,7 +176,15 @@ class Routes():
     def produtos():
         if 'email' not in session:
             return redirect('/login_restaurante')
-        return render_template("produtos.html")
+        try:
+            produtos = table_user.find_one({"email": session['email']})
+            produtos_lista = produtos["produtos"]
+            for n in produtos_lista:
+                imagem_binaria = n["imagem"]
+            imagem_base64 = base64.b64encode(imagem_binaria).decode('utf-8')
+            return render_template("produtos.html", produtos = produtos_lista, imagem_url=f"data:image/jpeg;base64,{imagem_base64}")
+        except:
+            return render_template("produtos.html")
     
     @app.route("/" + str(random.randint(100000, 999999)))
     def base_adm():
@@ -194,4 +198,11 @@ class Routes():
     def gestao_restaurante():
         if 'email' not in session:
             return redirect('/login_restaurante')
-        return render_template("gestao_restaurante.html")
+        restaurante = table_user.find_one({"email": session['email']})
+        restaurante_lista = restaurante["restaurante"]
+
+        return render_template("gestao_restaurante.html",  restaurante = restaurante_lista)
+
+    @app.route("/editProduto")
+    def editProduto():
+        return render_template("editProduto.html")

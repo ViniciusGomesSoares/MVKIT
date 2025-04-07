@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/flowbite@1.5.0/dist/flowbite.js"></script>
+    <link rel="stylesheet" href="/static/css/cardsprod.css">
     <title>Produtos</title>
     <style>
         #card_container {
@@ -130,8 +131,50 @@
                 </div>
             </div>
 
-
+            
         </section>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="cardsprod">
+            {% for prod in produtos %}
+            <!-- From Uiverse.io by Yaya12085 --> 
+            <div class="card" style="margin-left: 500px;">
+                <div class="header">
+                    
+                <div class="image"> <img src="{{ imagem_url }}" alt="produto '{{ prod.nome }}'"></div>
+                <div>
+                    <div class="stars">R${{ prod.valor }}</div>
+                    <p class="name">{{ prod.nome }}</p>
+                </div>
+                </div>
+
+                <p class="message">
+                    <span class="categoria">>{{ prod.categoria }}</span>
+                    <br>
+                    {{ prod.descricao }}
+
+                </p>
+            <div class="button">
+                <a href="/editProduto">
+                    <button>
+                        Editar
+                    </button>
+                </a>
+            </div>
+            </div>
+            
+            {% endfor %}
+            
+        </div>
+
+
     </main>
     <script>
         document.getElementById("price").addEventListener("input", function (e) {

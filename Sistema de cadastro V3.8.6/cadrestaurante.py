@@ -90,3 +90,42 @@ def criar_produto():
         upsert=True
     )
     return redirect("/produtos")
+
+@bp_restauranteadmin.route("/editar_prod", methods=["POST"])
+def editar_produto():
+    from bson import Binary
+
+    try:
+        index = int(request.form["id"])
+    except ValueError:
+        flash("ID inválido do produto!", "error")
+        return redirect("/produtos")
+
+    nome = request.form["name"]
+    valor = float(request.form["valor"])
+    categoria = request.form["categoria"]
+    descricao = request.form["descricao"]
+    img = request.files["file_img"]
+
+    usuario = table_user.find_one({"email": session["email"]})
+    if not usuario or "produtos" not in usuario or index >= len(usuario["produtos"]):
+        flash("Produto não encontrado!", "error")
+        return redirect("/produtos")
+
+    produto = usuario["produtos"][index]
+    produto["nome"] = nome
+    produto["valor"] = valor
+    produto["categoria"] = categoria
+    produto["descricao"] = descricao
+
+    if img and img.filename != "":
+        produto["imagem"] = Binary(img.read())
+
+    # Salva a lista atualizada
+    table_user.update_one(
+        {"email": session["email"]},
+        {"$set": {f"produtos.{index}": produto}}
+    )
+
+    flash("Produto atualizado com sucesso!", "success")
+    return redirect("/produtos")
