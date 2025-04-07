@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, session # type: ignore
+from flask import Flask, render_template, redirect, url_for, flash, session, send_file, Response # type: ignore
 from cadastro import criar_bp_cad, table
 from bson.objectid import ObjectId # type: ignore
 import os
@@ -8,12 +8,16 @@ from endereco import endereco_local
 from authy import authentic
 from dotenv import load_dotenv # type: ignore
 import random
+from cadrestaurante import bp_restauranteadmin, table_user
+import base64
+
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY') or os.urandom(24)
 
 app.register_blueprint(endereco_local)
 app.register_blueprint(criar_bp_cad)
 app.register_blueprint(authentic)
+app.register_blueprint(bp_restauranteadmin)
 
 load_dotenv()
 app.config["FACEBOOK_CLIENT_ID"] = os.getenv('FACEBOOK_CLIENT_ID')
@@ -28,12 +32,9 @@ facebook = oauth.register(
     name="facebook",
     client_id=app.config["FACEBOOK_CLIENT_ID"],
     client_secret=app.config["FACEBOOK_CLIENT_SECRET"],
-    authorize_url="https://www.facebook.com/dialog/oauth",
-    authorize_params={"scope": "email"},
-    access_token_url="https://graph.facebook.com/oauth/access_token",
-    access_token_params=None,
+    authorize_url="https://www.facebook.com/v12.0/dialog/oauth",
+    access_token_url="https://graph.facebook.com/v12.0/oauth/access_token",
     client_kwargs={"scope": "email"},
-    api_base_url="https://graph.facebook.com/",
 )
 
 google = oauth.register(
@@ -97,8 +98,26 @@ class Routes():
         try:
             token = facebook.authorize_access_token()
             user_info = facebook.get("me?fields=id,name,email").json()
-            session["user"] = user_info  # armazenei o usuário na sessão
-            return redirect('/')  # isso exibe os dados (mudar para redirecionamento depois)
+            try:
+                if user_info:
+                    nova_senha = gerar_senha()
+                    session["user"] = user_info
+                    email_user = user_info['email']
+                    usuario_existente = table.find_one({"email": email_user})
+                    if usuario_existente:
+                        session.clear()
+                        session['senha'] = str(nova_senha)
+                        session['email'] = email_user
+                        return redirect('/sms')
+                    session.clear()
+                    session['senha'] = str(nova_senha)
+                    session['email'] = email_user
+                    table.insert_one({'email': email_user})
+                    return redirect("/sms")
+            except:
+                print("Erro ainda desconhecido")
+                return redirect('/')
+        
         except Exception as e:
             return f"Erro no login: {str(e)}", 500
         
@@ -143,11 +162,41 @@ class Routes():
             return f"Erro no login: {str(e)}", 500
         
     @app.route("/admin_panel")
-    def admpanel():
-        return render_template("perfiladm.html")
+    def get_imagem():
+        if 'email' not in session:
+            return redirect('/login_restaurante')
+        usuario = table_user.find_one({"email": session['email']})
+        if not usuario or "imagem" not in usuario:
+            return render_template("perfiladm.html")
+        imagem_binaria = usuario["imagem"]
+        imagem_base64 = base64.b64encode(imagem_binaria).decode('utf-8')
+        return render_template("perfiladm.html", imagem_url=f"data:image/jpeg;base64,{imagem_base64}", email = session['email'])
+    
     @app.route("/produtos")
     def produtos():
-        return render_template("produtos.html")
+        if 'email' not in session:
+            return redirect('/login_restaurante')
+        produtos = table_user.find_one({"email": session['email']})
+        produtos_lista = produtos["produtos"]
+        for n in produtos_lista:
+            imagem_binaria = n["imagem"]
+        imagem_base64 = base64.b64encode(imagem_binaria).decode('utf-8')
+
+        return render_template("produtos.html", produtos = produtos_lista, imagem_url=f"data:image/jpeg;base64,{imagem_base64}")
+    
     @app.route("/" + str(random.randint(100000, 999999)))
     def base_adm():
         return render_template("base_adm_profile.html")
+    
+    @app.route("/login_restaurante")
+    def login_restaurante():
+        return render_template("loginRestaurante.html")
+    
+    @app.route("/gestao_restaurante")
+    def gestao_restaurante():
+        if 'email' not in session:
+            return redirect('/login_restaurante')
+        restaurante = table_user.find_one({"email": session['email']})
+        restaurante_lista = restaurante["restaurante"]
+
+        return render_template("gestao_restaurante.html",  restaurante = restaurante_lista)

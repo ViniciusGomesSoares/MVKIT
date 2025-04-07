@@ -29,56 +29,58 @@
    </div>
 <div id="default-styled-tab-content">
    <div class="hidden p-4 rounded-lg" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
-      <legend><img class="w-64 h-64 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_I7rzyXuOM-9Z0G8dNXa45_cMsNjdeOfBXA&s" alt="Rounded avatar">
-         <div class="flex items-center justify-center w-full">
-             <label for="dropzone-file" class="flex flex-col items-center justify-center w-64 h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                     <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                     </svg>
-                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                     <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                 </div>
-                 <form action="" method="post">
-                 <input id="dropzone-file" type="file" class="hidden" /></form>
-                 
-             </label>
-         </div> 
-         </legend>
+    <legend>
+        <div class="relative w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 mx-auto">
+            <img class="w-full h-full rounded-full" src="{{imagem_url}}" alt="Rounded avatar">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <label for="dropzone-file" class="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 border-4 border-gray-300 border-dashed rounded-full bg-gray-50 hover:bg-gray-100 cursor-pointer">
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-8 md:h-8 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                    </svg>
+                </label>
+                <form action="/cad_image" method="post" enctype="multipart/form-data">
+                    <input id="dropzone-file" name="file_img" type="file" class="hidden" />
+                
+            </div>
+        </div>
+        <div class="mt-4 text-center">
+            <button style="background-color: orange; color: white; border-radius: 5px; padding: 10px; cursor: pointer;" type="submit">Enviar</button></form>
+        </div>
+    </legend>
          <br><br>
          <section>
             <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed  dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="Seu email é: {{email}}" disabled>
          </section>
          <section class="form_container w-full">
-            <form>
+            <form action="/cad_restaurante" method="post">
                 <div class="grid gap-6 mb-6 md:grid-cols-2 w-full">
                     <div>
-                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Primeiro nome</label>
-                        <input type="text" id="first_name" class=" border border-gray-300 text-black-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Joao" required />
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Nome do seu restaurante</label>
+                        <input type="text" id="first_name" name="nome" class=" border border-gray-300 text-black-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ex: Burger King, MC Donalds, KFC..." required />
                     </div>
                     <br>
                     <div>
-                        <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sobrenome</label>
-                        <input type="text" id="last_name" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Dias" required />
+                        <label for="endereco" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Endereço</label>
+                        <input type="text" id="last_name" name="endereco" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ex: São Paulo, AV. Paulista, 29" required />
                     </div>  
                     <br>
                     <div>
-                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone</label>
-                        <input type="tel" id="phone" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="11999999999"  required maxlength="11" minlength="11"/>
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Telefone</label>
+                        <input type="tel" id="phone" name="phone" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="11999999999"  required maxlength="11" minlength="11"/>
                     </div>
                     <br>
                     <div>
-                        <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Website URL</label>
-                        <input type="url" id="website" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="www.minhaloja.com.br" required />
+                        <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Website URL</label>
+                        <input type="text" id="website" name="url" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="/minhaloja" required />
                     </div>
                 </div>
                 <div class="flex items-start mb-6">
                     <div class="flex items-center h-5">
-                    <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
+                    <input id="remember" type="checkbox" value="" class="checkbox w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
                     </div>
                     <label for="remember" class="ms-2 text-sm font-medium text-gray dark:text-gray-800">Eu concordo com os <a href="#" class="text-red-600 hover:underline dark:text-red-500">termos e condições</a>.</label>
                 </div>
-                <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Submit</button>
+                <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Enviar informações</button>
             </form>
             </section>
    </div>

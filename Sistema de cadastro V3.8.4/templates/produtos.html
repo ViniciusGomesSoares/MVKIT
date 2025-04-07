@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/flowbite@1.5.0/dist/flowbite.js"></script>
+    <link rel="stylesheet" href="/static/css/cardsprod.css">
+    <title>Produtos</title>
+    <style>
+        #card_container {
+            border: 1px solid rgba(174, 174, 174, 0.53);
+        }
+
+        #dropzone-file {
+            background: red;
+            opacity: 50%;
+            border-radius: 50%;
+            transition: 0.2s ease-in-out;
+
+        }
+
+        #dropzone-file:hover {
+            opacity: 100%;
+            transition: 0.2s ease-in-out;
+        }
+        #button_create{
+            position: relative;
+            top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'base_adm_profile.html' %}
+    <main>
+        <section>
+
+
+            <!-- Modal toggle -->
+            <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
+                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-orange-500 dark:focus:ring-blue-800" id="button_create"
+                type="button">
+                Adicionar Produto
+            </button>
+
+            <!-- Main modal -->
+            <div id="crud-modal" tabindex="-1" aria-hidden="true"
+                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-white">
+                <div class="relative p-4 w-full max-w-md max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white-600 rounded-lg shadow-sm dark:bg-white-600" id="card_container">
+                        <!-- Modal header -->
+                        <div
+                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-white-200 bg-orange-500">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                Criar novo produto
+                            </h3>
+                            <button type="button"
+                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                data-modal-toggle="crud-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <form class="p-4 md:p-5" action="cadastrar_prod" method="post" enctype="multipart/form-data">
+                            <div class="inset-0 flex items-center justify-center">
+                                <label for="dropzone-file" class="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 border-4 border-gray-300 border-dashed rounded-full bg-gray-50 hover:bg-gray-100 cursor-pointer">
+                                    <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-8 md:h-8 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                    </svg>
+                                </label>
+                                    <input id="dropzone-file" name="file_img" type="file" class="hidden" />
+                                
+                            </div>
+                            <div class="mt-4 text-center">
+                                <div class="grid gap-4 mb-4 grid-cols-2">
+                                    <div class="col-span-2">
+                                        <label for="name"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Nome</label>
+                                        <input type="text" name="name" id="name"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Nome do produto" required="">
+                                    </div>
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="price"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Valor</label>
+                                        <input type="text" name="valor" id="price"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="$0000" required="">
+                                    </div>
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="categoria"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Categoria</label>
+                                        <select id="categoria" name="categoria"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-white-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            <option selected="">Selecionar categoria</option>
+                                            <option value="Pratos">Pratos</option>
+                                            <option value="Bebidas">Bebidas</option>
+                                            <option value="Lanches">Lanches</option>
+                                            <option value="Outros">Outros</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <label for="description"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-Black">Descrição
+                                            do Produto</label>
+                                        <textarea id="descricao" name="descricao" rows="4"
+                                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-white-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="Escreva a descrição do produto aqui!"></textarea>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                    class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-orange-500 dark:focus:ring-blue-800">
+                                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    Adicionar novo produto
+                                </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            
+        </section>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="cardsprod">
+            {% for prod in produtos %}
+            <!-- From Uiverse.io by Yaya12085 --> 
+            <div class="card" style="margin-left: 500px;">
+                <div class="header">
+                    
+                <div class="image"> <img src="{{ imagem_url }}" alt="produto '{{ prod.nome }}'"></div>
+                <div>
+                    <div class="stars">R${{ prod.valor }}</div>
+                    <p class="name">{{ prod.nome }}</p>
+                </div>
+                </div>
+
+                <p class="message">
+                    <span class="categoria">>{{ prod.categoria }}</span>
+                    <br>
+                    {{ prod.descricao }}
+
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </main>
+    <script>
+        document.getElementById("price").addEventListener("input", function (e) {
+            let value = e.target.value;
+
+            // Remove qualquer caractere que não seja número ou ponto decimal
+            value = value.replace(/[^0-9.]/g, '');
+
+            // Substituir múltiplos pontos por apenas um
+            let partes = value.split('.');
+            if (partes.length > 2) {
+                value = partes[0] + '.' + partes.slice(1).join('');
+            }
+
+            // Formatar para duas casas decimais (se houver ponto)
+            if (value.includes('.')) {
+                let [inteiros, decimais] = value.split('.');
+                if (decimais.length > 2) {
+                    decimais = decimais.substring(0, 2);
+                }
+                value = inteiros + '.' + decimais;
+            }
+
+            // Atualizar o valor do campo
+            e.target.value = value;
+        });
+    </script>
+</body>
+
+</html>

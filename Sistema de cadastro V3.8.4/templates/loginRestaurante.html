@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/loginRestaurante.css">
+    <link rel="stylesheet" href="../static/var.css">
+    <title>Login - Restaurante</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+            <img src="../static/logo2.png" alt="Logo">
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="#">Inicio</a>
+            <a href="#">Restaurantr</a>
+            <a href="#">Cadegoria</a>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn-entrar">Entrar no Portal</button>
+            <button class="btn-cadastrar">Cadastrar</button>
+        </div>
+    </header>
+    <div class="container">
+        <div class="card">
+            <form action="/cad_restaurante_user" method="post">
+            <h2>Cadastre-se</h2>
+            
+            <input type="email" name="email" placeholder="Digite seu e-mail">
+            <button type="submit">Cadastrar Agora</button></form>
+        </div>
+    </div>
+</body>
+</html>
