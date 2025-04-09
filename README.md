@@ -5,6 +5,7 @@ Este projeto é um sistema Web desenvolvido com **Python** , **HTML** e **CSS** 
 
 ## 📋 Pré-requisitos
 Antes de começar, você precisa ter instalado no seu sistema:
+- **Instale o** **[Python]( https://www.python.org/downloads/)**
 - **Um editor de código**, como **[VS Code](https://code.visualstudio.com/)**
 - **[Git](https://git-scm.com/)** (opcional, mas recomendado)
 
