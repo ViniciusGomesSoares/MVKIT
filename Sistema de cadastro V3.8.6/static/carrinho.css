@@ -1,0 +1,253 @@
+/* Estilos Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: #f8f8f8;
+    color: #333;
+    padding-bottom: 80px;
+}
+
+/* Container Principal */
+.carrinho-container {
+    max-width: 100%;
+    margin: 0 auto;
+    background: white;
+}
+
+/* Cabeçalho */
+.carrinho-header {
+    padding: 16px;
+    background-color: #ea1d2c;
+    color: white;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.voltar-btn {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.carrinho-header h1 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.itens-count {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Informações do Restaurante */
+.restaurante-info {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 12px;
+}
+
+.restaurante-logo {
+    width: 70px;
+    height: auto;
+    border-radius: 8px;
+    object-fit:cover;
+}
+
+.restaurante-nome {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.restaurante-endereco {
+    font-size: 13px;
+    color: #666;
+}
+
+.itens-carrinho {
+    padding: 0 16px;
+}
+
+.item {
+    display: flex;
+    padding: 16px 0;
+    border-bottom: 1px solid #f5f5f5;
+    gap: 12px;
+}
+
+.item-img {
+    width: 80px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.item-desc {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.item-controle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-preco {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.quantidade-controle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qtd-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: white;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.qtd-value {
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Seção de Cupom */
+.cupom-section {
+    padding: 16px;
+    border-top: 8px solid #f8f8f8;
+    border-bottom: 8px solid #f8f8f8;
+}
+
+.cupom-input {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 16px;
+    gap: 8px;
+}
+
+.cupom-input input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.cupom-input button {
+    background: none;
+    border: none;
+    color: #ea1d2c;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Resumo do Pedido */
+.resumo-pedido {
+    padding: 16px;
+}
+
+.resumo-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.resumo-linha {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.resumo-linha.total {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Rodapé Fixo */
+.carrinho-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+
+.total-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.total-label {
+    font-size: 12px;
+    color: #666;
+}
+
+.total-value {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.finalizar-btn {
+    background-color: #ea1d2c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+    max-width: 200px;
+    margin-left: 16px;
+}
