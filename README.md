@@ -7,6 +7,7 @@ Este projeto é um sistema Web desenvolvido com **Python** , **HTML** e **CSS** 
 Antes de começar, você precisa ter instalado no seu sistema:
 - **Instale o** **[Python]( https://www.python.org/downloads/)**
 - **Um editor de código**, como **[VS Code](https://code.visualstudio.com/)**
+- Para armazenas as informações no banco de dados instale o **[MongoDB](https://www.mongodb.com/products/tools/compass)**
 - **[Git](https://git-scm.com/)** (opcional, mas recomendado)
 
 ---
@@ -38,3 +39,47 @@ Após ativar a venv, você verá algo parecido com (venv) no início da linha do
 ```sh
 pip install -r requirements.txt
 ```
+
+---
+
+## 🔹 Observações
+O projeto utiliza:
+
+- **Python** para fazer o gerenciamentos de rotas
+- **HTML** para a interface
+- **CSS** para estilização
+- **BootStrap** para interface e estilazação
+- **Tailwind** para interface e estilazação
+- **MongoDB** para o Banco de dados
+
+Caso ocorra erro ao executar o `.exe`, verifique se os arquivos de build foram gerados corretamente e se os caminhos dos arquivos estão corretos no `main.js`.
+```sh
+📦 MeuProjeto  
+├── 📂 static             # Arquivos estáticos (CSS, JS, imagens, etc.)
+├── 📂 templates          # Templates HTML do projeto
+├── .gitignore            # Arquivos/pastas ignorados pelo Git  
+├── app.py                # Arquivo principal da aplicação Flask  
+├── authy.py              # Lógica de autenticação  
+├── cadastro.py           # Lógica de cadastro de usuários  
+├── cadrestaurante.py     # Lógica de cadastro de restaurantes  
+├── endereco.py           # Gerenciamento de endereços  
+├── requirements.txt      # Lista de dependências do projeto  
+└── routes.py             # Definição das rotas da aplicação  
+```
+
+### 🙌 Agradecimentos
+Este projeto foi idealizado e desenvolvido com dedicação pelo grupo MVKIT, formado por mentes brilhantes e apaixonadas por tecnologia:
+
+💡 Vinícius Gomes Soares
+
+💡 Kauê Oliveira Costa
+
+💡 Thiago felix silva
+
+💡 Matheus Geraldi da Silva
+
+💡 Igor Isidoro de Souza
+
+"Juntos, transformamos ideias em código e código em soluções." 🚀
+
+Feito com 💙 por MVKIT
