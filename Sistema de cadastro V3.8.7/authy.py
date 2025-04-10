@@ -12,8 +12,8 @@ def auth():
     sms6 = request.form["sms6"]
     code = sms1 + sms2 + sms3 + sms4 + sms5 + sms6
     try:
-        if code == session['senha']:
-            session.pop('senha', None)
+        if code == session['codigo_autenticacao']:
+            session.pop('codigo_autenticacao', None)
             print("Daqui passou")
             try:
                 email = table.find_one({'email': session['email']})

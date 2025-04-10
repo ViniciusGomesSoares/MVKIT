@@ -86,8 +86,7 @@ class Routes():
     
     @app.route('/sms')
     def sms():
-        notify = session['senha']
-        return render_template("sms.html", senha = notify)
+        return render_template("sms.html")
     
     @app.route("/login/facebook")
     def login_facebook():
