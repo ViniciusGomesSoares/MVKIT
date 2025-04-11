@@ -1,5 +1,5 @@
 # 🚀 Projeto - MVKIT
-Este projeto é um sistema Web desenvolvido com **Python** , **HTML** e **CSS** permitindo o gerenciamento de returantes, produtos, carrinho de compras e um sistema de cadastro baseado no IFOOD
+Este projeto é um sistema Web desenvolvido com **Python** , **HTML** e **CSS** permitindo o gerenciamento de retaurantes, produtos, carrinho de compras e um sistema de cadastro baseado no IFOOD
 
 ---
 
