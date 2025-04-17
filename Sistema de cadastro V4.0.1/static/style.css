@@ -216,3 +216,27 @@ body {
   top: 10px;
   opacity: 50%;
 }
+.btn-carrinho {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #EC8A4D;
+    padding: 16px;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-carrinho:hover {
+    background-color: #EC8A4D;
+    transform: scale(1.1);
+}
+
+.btn-carrinho svg {
+    display: block;
+}

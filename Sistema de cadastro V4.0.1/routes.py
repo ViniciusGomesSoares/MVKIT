@@ -10,10 +10,12 @@ from dotenv import load_dotenv # type: ignore
 import random
 from cadrestaurante import bp_restauranteadmin, table_user
 import base64
+from carrinho import carrinho_bp
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY') or os.urandom(24)
 
+app.register_blueprint(carrinho_bp)
 app.register_blueprint(endereco_local)
 app.register_blueprint(criar_bp_cad)
 app.register_blueprint(authentic)
@@ -205,3 +207,15 @@ class Routes():
     @app.route("/editProduto")
     def editProduto():
         return render_template("editProduto.html")
+    
+    @app.route("/info_prod")
+    def info_prod():
+        return render_template("info_prod.html")
+    
+    @app.route("/carrinho")
+    def teste_carrinho():
+        try:
+            carrinho = session["carrinho"]
+            return render_template("carrinho.html", carrinho=carrinho)
+        except:
+            return render_template("carrinho.html", carrinho=[])
