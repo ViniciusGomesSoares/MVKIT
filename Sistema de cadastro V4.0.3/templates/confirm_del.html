@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/main.css">
+    <title>Confirmar ação</title>
+    <style>
+        .card {
+          overflow: hidden;
+          position: relative;
+          background-color: #ffffff;
+          text-align: left;
+          border-radius: 0.5rem;
+          max-width: 290px;
+          box-shadow:
+            0 20px 25px -5px rgba(0, 0, 0, 0.1),
+            0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            margin: 0 auto;
+            align-items: center;
+            justify-self: center;
+            top: 20vh;
+            
+        }
+        
+        .header {
+          padding: 1.25rem 1rem 1rem 1rem;
+          background-color: #ffffff;
+        }
+        
+        .image {
+          display: flex;
+          margin-left: auto;
+          margin-right: auto;
+          background-color: #fee2e2;
+          flex-shrink: 0;
+          justify-content: center;
+          align-items: center;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 9999px;
+        }
+        
+        .image svg {
+          color: #dc2626;
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+        
+        .content {
+          margin-top: 0.75rem;
+          text-align: center;
+        }
+        
+        .title {
+          color: #111827;
+          font-size: 1rem;
+          font-weight: 600;
+          line-height: 1.5rem;
+        }
+        
+        .message {
+          margin-top: 0.5rem;
+          color: #6b7280;
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+        }
+        
+        .actions {
+          margin: 0.75rem 1rem;
+          background-color: #f9fafb;
+        }
+        
+        .desactivate {
+          display: inline-flex;
+          padding: 0.5rem 1rem;
+          background-color: #dc2626;
+          color: #ffffff;
+          font-size: 1rem;
+          line-height: 1.5rem;
+          font-weight: 500;
+          justify-content: center;
+          width: 100%;
+          border-radius: 0.375rem;
+          border-width: 1px;
+          border-color: transparent;
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+          transition: 0.4s ease-in-out;
+        }
+        .desactivate:hover {
+            background-color: #860909;
+            transition: 0.4s ease-in-out;
+        }
+        .cancel {
+          display: inline-flex;
+          margin-top: 0.75rem;
+          padding: 0.5rem 1rem;
+          background-color: #ffffff;
+          color: #374151;
+          font-size: 1rem;
+          line-height: 1.5rem;
+          font-weight: 500;
+          justify-content: center;
+          width: 100%;
+          border-radius: 0.375rem;
+          border: 1px solid #d1d5db;
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        button {
+          cursor: pointer;
+        }
+        .containerbk {
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(
+      125% 125% at -2% 101%,
+      rgba(245, 87, 2, 1) 10.5%,
+      rgba(245, 120, 2, 1) 16%,
+      rgba(245, 140, 2, 1) 17.5%,
+      rgba(245, 170, 100, 1) 25%,
+      rgba(238, 174, 202, 1) 40%,
+      rgba(202, 179, 214, 1) 65%,
+      rgba(148, 201, 233, 1) 100%
+    );
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+        </style>
+</head>
+<body>
+    <div class="containerbk">
+
+<div class="card">
+    <div class="header">
+      <div class="image">
+        <svg
+          aria-hidden="true"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+          ></path>
+        </svg>
+      </div>
+      <div class="content">
+        <span class="title">Desativar conta</span>
+        <p class="message">
+          Você tem certeza que quer apagar sua conta? Todos os seus dados vão ser permantentemente removidos. Essa ação não pode ser desfeita.
+        </p>
+      </div>
+      <div class="actions">
+        <form action="/delete_cad" method="POST">
+        <button class="desactivate" type="submit">Desativar</button>
+    </form>
+        <a href="/meusdados"><button class="cancel" type="button">Cancelar</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

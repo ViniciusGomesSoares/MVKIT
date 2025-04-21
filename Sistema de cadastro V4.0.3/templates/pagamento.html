@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento</title>
+  <style>
+    
+    body { 
+        font-family: Arial, sans-serif; 
+        padding: 20px; 
+        background: #f9f9f9; 
+    }
+    .container { 
+        max-width: 500px; 
+        margin: auto; 
+        background: #fff; 
+        padding: 20px; 
+        border-radius: 10px; 
+    }
+    label { 
+        
+        display: block; 
+        
+        margin-top: 15px; 
+    
+    }
+    input, select { 
+        width: 100%; 
+        padding: 10px; 
+        margin-top: 5px; 
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+    }
+    button { 
+        margin-top: 20px; 
+        width: 100%; 
+        padding: 10px; 
+        background: #28a745; 
+        color: #fff; 
+        border: none; 
+        border-radius: 5px; 
+        cursor: pointer; 
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Pagamento</h2>
+    <label>Nome no cartão</label>
+    <input type="text" placeholder="Ex: Matheus Geraldi" />
+
+    <label>Número do cartão</label>
+    <input type="text" placeholder="XXXX XXXX XXXX XXXX" />
+
+    <label>Data de validade</label>
+    <input type="month" />
+
+    <label>CVV</label>
+    <input type="text" placeholder="123" />
+
+    <label>Forma de pagamento</label>
+    <select>
+      <option>Cartão de crédito</option>
+      <option>Cartão de débito</option>
+      <option>PIX</option>
+      <option>Boleto</option>
+    </select>
+
+    <button>Pagar agora</button>
+  </div>
+</body>
+</html>
