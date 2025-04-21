@@ -63,3 +63,18 @@
   .categoria {
     color: #383838;
   }
+
+  .card .button {
+    display: flex;
+    text-align: center;
+    padding: 5px;
+    position: relative;
+    background-color: #9f9a9a;
+    left: 150px;
+    top: -120px;
+    border-radius: 5px;
+  }
+
+  .button {
+    width: 60px;
+  }

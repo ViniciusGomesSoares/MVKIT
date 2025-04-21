@@ -10,10 +10,12 @@ from dotenv import load_dotenv # type: ignore
 import random
 from cadrestaurante import bp_restauranteadmin, table_user
 import base64
+from carrinho import carrinho_bp
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY') or os.urandom(24)
 
+app.register_blueprint(carrinho_bp)
 app.register_blueprint(endereco_local)
 app.register_blueprint(criar_bp_cad)
 app.register_blueprint(authentic)
@@ -86,8 +88,7 @@ class Routes():
     
     @app.route('/sms')
     def sms():
-        notify = session['senha']
-        return render_template("sms.html", senha = notify)
+        return render_template("sms.html")
     
     @app.route("/login/facebook")
     def login_facebook():
@@ -176,13 +177,15 @@ class Routes():
     def produtos():
         if 'email' not in session:
             return redirect('/login_restaurante')
-        produtos = table_user.find_one({"email": session['email']})
-        produtos_lista = produtos["produtos"]
-        for n in produtos_lista:
-            imagem_binaria = n["imagem"]
-        imagem_base64 = base64.b64encode(imagem_binaria).decode('utf-8')
-
-        return render_template("produtos.html", produtos = produtos_lista, imagem_url=f"data:image/jpeg;base64,{imagem_base64}")
+        try:
+            produtos = table_user.find_one({"email": session['email']})
+            produtos_lista = produtos["produtos"]
+            for n in produtos_lista:
+                imagem_binaria = n["imagem"]
+            imagem_base64 = base64.b64encode(imagem_binaria).decode('utf-8')
+            return render_template("produtos.html", produtos = produtos_lista, imagem_url=f"data:image/jpeg;base64,{imagem_base64}")
+        except:
+            return render_template("produtos.html")
     
     @app.route("/" + str(random.randint(100000, 999999)))
     def base_adm():
@@ -200,3 +203,19 @@ class Routes():
         restaurante_lista = restaurante["restaurante"]
 
         return render_template("gestao_restaurante.html",  restaurante = restaurante_lista)
+
+    @app.route("/editProduto")
+    def editProduto():
+        return render_template("editProduto.html")
+    
+    @app.route("/info_prod")
+    def info_prod():
+        return render_template("info_prod.html")
+    
+    @app.route("/carrinho")
+    def teste_carrinho():
+        try:
+            carrinho = session["carrinho"]
+            return render_template("carrinho.html", carrinho=carrinho)
+        except:
+            return render_template("carrinho.html", carrinho=[])

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 .logo{
     width: 70px;
     position: relative;
@@ -216,3 +218,87 @@ body {
   top: 10px;
   opacity: 50%;
 }
+.btn-carrinho {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #EC8A4D;
+    padding: 16px;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-carrinho:hover {
+    background-color: #EC8A4D;
+    transform: scale(1.1);
+}
+
+.btn-carrinho svg {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* tela de pesquisa de produtos */
+
+.card-comida{
+	width: 180px;
+	height: 200px;
+	border-radius: 10px;
+	border: 1px solid var(--color-terciary);
+	font-family: "Poppins", serif !important;
+}
+
+.card-comida .bc-img{
+	background-color: #7c7c7c;
+	width: 100%;
+	height: 130px;
+	border-radius: 10px 10px 0 0;
+}
+
+.card-comida ul{
+	list-style: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

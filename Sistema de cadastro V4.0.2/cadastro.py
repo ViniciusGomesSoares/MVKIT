@@ -1,4 +1,5 @@
 from flask import Blueprint, request, redirect, url_for, flash, session   # type: ignore
+from emailEnvio import enviar_codigo_autenticacao # type: ignore
 from pymongo import MongoClient # type: ignore
 from bson.objectid import ObjectId # type: ignore
 import random
@@ -12,25 +13,46 @@ db = cliente.database_Mvkit
 def gerar_senha():
     return str(random.randint(100000, 999999))
 
+def validacao_entrega():
+    return str(random.randint(1000, 9999))
+
 table = db.usuario
 
+
+# @criar_bp_cad.route("/cadastrar", methods=["POST"])
+# def cadastro():
+#     email = request.form["email"]
+#     usuario_existente = table.find_one({"email": email})
+#     nova_senha = gerar_senha()
+#     if usuario_existente:  
+#         print("Email já cadastrado")
+#         session.clear()
+#         session['email'] = email
+#         session['senha'] = str(nova_senha)
+#         return redirect("/sms") 
+#     email_id = table.insert_one({'email': email}).inserted_id
+#     session.clear()
+#     session['senha'] = str(nova_senha)
+#     session['usuario_id'] = str(email_id)
+#     session['email'] = email
+#     print("sucesso")
+#     return redirect("/sms")
 
 @criar_bp_cad.route("/cadastrar", methods=["POST"])
 def cadastro():
     email = request.form["email"]
+    codigo = enviar_codigo_autenticacao(email)
+    if not codigo:
+        return "Erro ao enviar o código de autenticação. Tente novamente.", 500
     usuario_existente = table.find_one({"email": email})
-    nova_senha = gerar_senha()
-    if usuario_existente:  
-        print("Email já cadastrado")
-        session.clear()
-        session['email'] = email
-        session['senha'] = str(nova_senha)
-        return redirect("/sms") 
-    email_id = table.insert_one({'email': email}).inserted_id
     session.clear()
-    session['senha'] = str(nova_senha)
-    session['usuario_id'] = str(email_id)
     session['email'] = email
+    session['codigo_autenticacao'] = codigo
+    if usuario_existente:
+        print("Email já cadastrado")
+        return redirect("/sms")
+    email_id = table.insert_one({'email': email}).inserted_id
+    session['usuario_id'] = str(email_id)
     print("sucesso")
     return redirect("/sms")
 
