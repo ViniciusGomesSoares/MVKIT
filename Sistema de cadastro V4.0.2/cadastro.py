@@ -13,6 +13,9 @@ db = cliente.database_Mvkit
 def gerar_senha():
     return str(random.randint(100000, 999999))
 
+def validacao_entrega():
+    return str(random.randint(1000, 9999))
+
 table = db.usuario
 
 
