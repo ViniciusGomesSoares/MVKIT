@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, session, send_file, Response # type: ignore
+from flask import Flask, render_template, redirect, url_for, flash, session, send_file, Response, request # type: ignore
 from cadastro import criar_bp_cad, table
 from bson.objectid import ObjectId # type: ignore
 import os
@@ -245,3 +245,39 @@ class Routes():
                 })
 
         return render_template("pesquisaProd.html", produtos=lista_produtos)
+
+    @app.route("/frete", methods=["GET", "POST"])
+    def opcoes_frete():
+        fretes = [
+            {
+                "nome": "Entrega padrão",
+                "tempo": "30-45",
+                "descricao": "Seu pedido chegará sem custos adicionais dentro do prazo estimado.",
+                "preco": 5,
+                "selecionado": False
+            },
+            {
+                "nome": "Entrega turbinada",
+                "tempo": "15-25",
+                "descricao": "Receba seu pedido mais rápido com nosso serviço prioritário.",
+                "preco": 9.90,
+                "selecionado": False 
+            },
+            {
+                "nome": "Retirar no local",
+                "tempo": "20",
+                "descricao": "Economize o valor do frete retirando seu pedido pessoalmente.",
+                "preco": 0,
+                "selecionado": False
+            }
+        ]
+        
+        if request.method == "POST":
+            frete_selecionado = request.form.get('frete')
+            for frete in fretes:
+                if frete['nome'] == frete_selecionado:
+                    frete['selecionado'] = True
+                else:
+                    frete['selecionado'] = False
+
+        return render_template("cards_frete.html", fretes=fretes)
