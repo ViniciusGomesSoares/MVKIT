@@ -70,7 +70,7 @@
         .btn-finalizar {
             display: block;
             width: 100%;
-            background-color: #28a745;
+            background-color: #dd9613;
             color: white;
             border: none;
             padding: 14px;
@@ -81,7 +81,7 @@
         }
 
         .btn-finalizar:hover {
-            background-color: #218838;
+            background-color: #dd9613;
         }
 
         .vazio {
@@ -97,33 +97,29 @@
     <h2>Seu Carrinho</h2>
 
     <div class="carrinho-container">
-        {% if carrinho %}
-            {% set total = 0 %}
+        {% if carrinho %}        
             {% for item in carrinho %}
                 <div class="item">
                     <div class="info">
                         <p><strong>{{ item['Produto'] }}</strong></p>
-                        <p>R$ {{ item['Valor'] }}</p>
+                        <p>Preço unitário: R$ {{ "%.2f"|format(item['Valor']) }}</p>
                         <p>Quantidade: {{ item['Quantidade'] }}</p>
                     </div>
                     <form action="/remove_item/{{ loop.index0 }}" method="post" class="remover-form">
                         <button type="submit">Remover</button>
                     </form>
                 </div>
-                {% set total = total + item['Valor'] * item['Quantidade'] %}
             {% endfor %}
-
-            <div class="total">
-                Total: R$ {{ total }}
-            </div>
-
+    
+    
             <form action="/finalizar_compra" method="post">
-                <button type="submit" class="btn-finalizar">Finalizar Pedido</button>
+                <button type="submit" class="btn-finalizar">Continuar pedido</button>
             </form>
         {% else %}
             <p class="vazio">Seu carrinho está vazio!</p>
         {% endif %}
     </div>
+    
 
 </body>
 </html>
