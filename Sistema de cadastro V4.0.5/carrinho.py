@@ -18,6 +18,18 @@ def add_cart():
 
     return redirect("/carrinho")
 
+@carrinho_bp.route("/atualizar_quantidade/<int:index>", methods=["POST"])
+def atualizar_quantidade(index):
+    nova_qtd = int(request.form["quantidade"])
+
+    if "carrinho" in session:
+        carrinho = session["carrinho"]
+        if 0 <= index < len(carrinho):
+            carrinho[index]["Quantidade"] = nova_qtd
+            session["carrinho"] = carrinho
+            session.modified = True
+
+    return redirect("/carrinho")
 
 @carrinho_bp.route("/remove_item/<int:index>", methods=["POST"])
 def remove_item(index):

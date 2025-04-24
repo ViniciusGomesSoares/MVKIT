@@ -90,6 +90,37 @@
             font-size: 18px;
             color: #777;
         }
+        .quantidade-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.input-quantidade {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.btn-atualizar {
+    padding: 6px 12px;
+    background-color: #2b2a28;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-atualizar:hover {
+    background-color: #2b2a28;
+}
+
     </style>
 </head>
 <body>
@@ -103,14 +134,20 @@
                     <div class="info">
                         <p><strong>{{ item['Produto'] }}</strong></p>
                         <p>Preço unitário: R$ {{ "%.2f"|format(item['Valor']) }}</p>
-                        <p>Quantidade: {{ item['Quantidade'] }}</p>
+                        
+                        <form action="/atualizar_quantidade/{{ loop.index0 }}" method="post" class="quantidade-form">
+                            <label for="quantidade-{{ loop.index0 }}">Quantidade:</label>
+                            <input type="number" id="quantidade-{{ loop.index0 }}" name="quantidade" value="{{ item['Quantidade'] }}" min="1" class="input-quantidade" required>
+                            <button type="submit" class="btn-atualizar">Atualizar</button>
+                        </form>
+                        
                     </div>
+    
                     <form action="/remove_item/{{ loop.index0 }}" method="post" class="remover-form">
                         <button type="submit">Remover</button>
                     </form>
                 </div>
             {% endfor %}
-    
     
             <form action="/finalizar_compra" method="post">
                 <button type="submit" class="btn-finalizar">Continuar pedido</button>
