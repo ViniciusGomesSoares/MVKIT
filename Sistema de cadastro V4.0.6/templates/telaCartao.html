@@ -46,28 +46,29 @@
 </head>
 <body>
   <div class="container">
-    <h2>Pagamento</h2>
-    <label>Nome no cartão</label>
-    <input type="text" placeholder="Ex: Matheus Geraldi" />
-
-    <label>Número do cartão</label>
-    <input type="text" placeholder="XXXX XXXX XXXX XXXX" />
-
-    <label>Data de validade</label>
-    <input type="month" />
-
-    <label>CVV</label>
-    <input type="text" placeholder="123" />
-
-    <label>Forma de pagamento</label>
-    <select>
-      <option>Cartão de crédito</option>
-      <option>Cartão de débito</option>
-      <option>PIX</option>
-      <option>Boleto</option>
-    </select>
-
-    <button>Pagar agora</button>
+    <form action="/salvarCard" method="POST">
+      <h2>Pagamento</h2>
+  
+      <label>Nome no cartão</label>
+      <input type="text" name="nome_cartao" placeholder="Ex: Matheus Geraldi" required>
+  
+      <label>Número do cartão</label>
+      <input type="text" name="numero_cartao" placeholder="XXXX XXXX XXXX XXXX" required>
+  
+      <label>Data de validade</label>
+      <input type="month" name="validade_cartao" required>
+  
+      <label>CVV</label>
+      <input type="text" name="cvv" placeholder="123" required>
+  
+      <label>Forma de pagamento</label>
+      <select name="forma_pagamento" required>
+        <option>Cartão de crédito</option>
+        <option>Cartão de débito</option>
+      </select>
+  
+      <button type="submit">Salvar Cartão</button>
+  </form> 
   </div>
 </body>
 </html>

@@ -281,3 +281,12 @@ class Routes():
                     frete['selecionado'] = False
 
         return render_template("cards_frete.html", fretes=fretes)
+    
+    @app.route("/pagamento", methods=["GET"])
+    def telaPagamento():
+        return render_template("telaPagamento.html")
+    
+    @app.route("/cartao")
+    def cartao():
+        return render_template("telaCartao.html")
+    

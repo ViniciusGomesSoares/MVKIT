@@ -38,3 +38,4 @@ def remove_item(index):
         carrinho.pop(index)
         session['carrinho'] = carrinho
     return redirect("/carrinho")
+

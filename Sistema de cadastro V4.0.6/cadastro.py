@@ -19,25 +19,6 @@ def validacao_entrega():
 table = db.usuario
 
 
-# @criar_bp_cad.route("/cadastrar", methods=["POST"])
-# def cadastro():
-#     email = request.form["email"]
-#     usuario_existente = table.find_one({"email": email})
-#     nova_senha = gerar_senha()
-#     if usuario_existente:  
-#         print("Email já cadastrado")
-#         session.clear()
-#         session['email'] = email
-#         session['senha'] = str(nova_senha)
-#         return redirect("/sms") 
-#     email_id = table.insert_one({'email': email}).inserted_id
-#     session.clear()
-#     session['senha'] = str(nova_senha)
-#     session['usuario_id'] = str(email_id)
-#     session['email'] = email
-#     print("sucesso")
-#     return redirect("/sms")
-
 @criar_bp_cad.route("/cadastrar", methods=["POST"])
 def cadastro():
     email = request.form["email"]
@@ -108,3 +89,35 @@ def delete():
             return redirect("/")
     except:
         return redirect("/meusdados")
+
+
+@criar_bp_cad.route("/salvarCard", methods=["POST"])
+def pagamento():
+    if 'usuario_id' not in session:
+        return "Usuário não autenticado.", 401
+
+    # Pegando os dados do form
+    nome_cartao = request.form.get("nome_cartao")
+    numero_cartao = request.form.get("numero_cartao")
+    validade_cartao = request.form.get("validade_cartao")
+    cvv = request.form.get("cvv")
+    forma_pagamento = request.form.get("forma_pagamento")
+
+    # Atualizando o documento do usuário com os dados do cartão
+    result = table.update_one(
+        {"_id": ObjectId(session['usuario_id'])},
+        {"$push": {
+            "cartoes": {
+                "nome_cartao": nome_cartao,
+                "numero_cartao": numero_cartao,
+                "validade_cartao": validade_cartao,
+                "cvv": cvv,
+                "forma_pagamento": forma_pagamento
+            }
+        }}
+    )
+
+    if result.modified_count == 0:
+        return "Erro ao salvar cartão.", 500
+
+    return redirect("/pagamento")  # redirecionar para uma página que você quiser
