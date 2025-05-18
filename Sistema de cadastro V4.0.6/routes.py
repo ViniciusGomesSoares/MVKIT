@@ -282,11 +282,75 @@ class Routes():
 
         return render_template("cards_frete.html", fretes=fretes)
     
-    @app.route("/pagamento", methods=["GET"])
-    def telaPagamento():
-        return render_template("telaPagamento.html")
-    
+    @app.route("/pagamento")
+    def pagamento():
+        carrinho = session.get("carrinho", [])
+        subtotal = sum(item["Valor"] * item["Quantidade"] for item in carrinho)
+        taxa_entrega = 0.00
+        total = subtotal + taxa_entrega
+
+        # Verificação de cartão salvo
+        identificador = session.get("email") or session.get("numero")
+        if not identificador:
+            return redirect("/")
+
+        filtro = {"email": session["email"]} if "email" in session else {"numero": session["numero"]}
+        usuario = table.find_one(filtro)
+
+        tem_cartao = False
+        if usuario and "cartoes" in usuario and len(usuario["cartoes"]) > 0:
+            tem_cartao = True
+
+        return render_template("telaPagamento.html",
+                            carrinho=carrinho,
+                            subtotal=subtotal,
+                            total=total,
+                            tem_cartao=tem_cartao)
+
     @app.route("/cartao")
     def cartao():
         return render_template("telaCartao.html")
+    
+    @app.route("/acompanhamento")
+    def acompanhamento():
+        
+        return render_template("acompanhamento.html")
+    
+    @app.route("/finalizar_pedido", methods=["POST"])
+    def finalizar_pedido():
+
+        carrinho = session.get("carrinho", [])
+        if not carrinho:
+            return "Carrinho vazio", 400
+
+        subtotal = sum(item["Valor"] * item["Quantidade"] for item in carrinho)
+        taxa_entrega = 0.00
+        total = subtotal + taxa_entrega
+
+        pedido = {
+            "itens": carrinho,
+            "subtotal": subtotal,
+            "taxa_entrega": taxa_entrega,
+            "total": total,
+            "status": "Realizado"
+        }
+
+        try:
+            if session.get('email'):
+                table.update_one({"email": session['email']}, {"$push": {"pedidos": pedido}})
+            elif session.get('numero'):
+                table.update_one({"numero": session['numero']}, {"$push": {"pedidos": pedido}})
+            else:
+                return "Usuário não encontrado", 400
+
+            # Limpa o carrinho após finalizar
+            session.pop("carrinho", None)
+
+            return redirect("/acompanhamento")
+
+        except Exception as e:
+            print("Erro ao salvar pedido:", e)
+            return "Erro ao finalizar pedido", 500
+
+
     
