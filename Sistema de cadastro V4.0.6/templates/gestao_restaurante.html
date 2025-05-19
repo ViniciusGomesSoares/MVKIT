@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/static/css/cardsrestaurante.css">
+    <link rel="stylesheet" href="/static/var.css">
+</head>
+<body>
+
+
+
+    <div class="card sweeperCard o-hidden">
+        <div class="containers">
+          <div class="icon">
+            <svg
+              width="28"
+              height="29"
+              viewBox="0 0 28 29"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M23.7222 9.04435V6.71102C23.7222 5.42235 22.6775 4.37769 21.3888 4.37769L6.61106 4.37769C5.32239 4.37769 4.27773 5.42235 4.27773 6.71102V9.04435C4.27773 10.333 5.32239 11.3777 6.61106 11.3777H21.3888C22.6775 11.3777 23.7222 10.333 23.7222 9.04435Z"
+                stroke="#EC8A4D"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M23.7222 21.4888V19.1555C23.7222 17.8668 22.6775 16.8221 21.3888 16.8221H15.9444C14.6557 16.8221 13.6111 17.8668 13.6111 19.1555V21.4888C13.6111 22.7775 14.6557 23.8221 15.9444 23.8221H21.3888C22.6775 23.8221 23.7222 22.7775 23.7222 21.4888Z"
+                stroke="#EC8A4D"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </div>
+          <div class="title my-3">{{ restaurante.nome }}</div>
+          <div class="subtitle">
+            {{ restaurante.endereco }}
+            <br>
+            {{ restaurante.telephone }}
+            <br>
+            {{ restaurante.url }}
+          </div>
+          <div class="linkMore mt-3">
+            Learn More
+          </div>
+        </div>
+      </div>
+
+      
+
+
+
+
+
+
+</body>
+</html>

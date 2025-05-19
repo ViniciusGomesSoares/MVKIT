@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--color-terciary);
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-primary);
+    padding: 15px 50px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0);
+}
+
+.logo img {
+    width: 100px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 150px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-secondary);
+    font-weight: bold;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.auth-buttons button {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 10px; 
+}
+
+.btn-entrar {
+    background-color: #fff;
+    color: #ff003cf4;
+    border: 3px solid --color-secondary;
+}
+
+.btn-cadastrar {
+    background-color: #ff003cf4;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: calc(100vh - 80px);
+    padding-right: 70px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 30px;
+    padding-top: 7dvw;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 475px;
+    text-align: center;
+    height: 350px;
+    border: 2px solid ;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+}
+
+.card input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.card button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff003cf4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

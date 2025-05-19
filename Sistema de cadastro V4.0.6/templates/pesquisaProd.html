@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-br
+">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pesquisa de prudutos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/var.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="../static/logo2.png">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    body {
+      font-family: "Poppins", serif !important;
+      font-style: normal !important;
+    }
+
+    .div_logo {
+      position: relative;
+      left: 200px !important;
+    }
+
+    .card-text a h5 {
+      font-family: "Poppins", serif !important;
+      font-weight: 600 !important;
+      font-style: normal !important;
+      font-size: 1.4rem;
+    }
+
+    .container-cards {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .Search {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .Search button {
+      width: 180px;
+      height: 50px;
+      background: #EC8A4D;
+      color: #fff;
+      font-weight: 400;
+      border: 0;
+      border-radius: 4px;
+      transition: ease-in-out 0.3s;
+    }
+
+    .Search button:hover {
+      background: #ffffff;
+      color: #EC8A4D;
+      cursor: pointer;
+      transition: ease-in-out 0.3s;
+    }
+
+    .card-list-prod {
+      width: 190px;
+      height: 254px;
+      border-radius: 30px;
+      background: #e0e0e0;
+      box-shadow: 15px 15px 30px #bebebe,
+        -15px -15px 30px #ffffff;
+    }
+
+    .container_produto {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+    }
+
+    .container_produto img {
+      object-fit: cover;
+      height: 200px;
+    }
+
+    .card {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .card-footer button {
+      font-size: 0.9rem;
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="hero mb-5">
+      <div class="header">
+        <ul>
+          <li class="div_logo" style="position: relative;left: 100px;"><img src="../static/logo2.png" class="logo"
+              alt=""></li>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="">Restaurantes</a></li>
+          <li><a href="">Categorias</a></li>
+          {% if session['cep'] %}
+          <li><a href="/meusdados">Dados da conta</a></li>
+          {% endif %}
+          <form class="d-flex ms-5 Search" role="search">
+            <input class="form-control  me-2" type="search" placeholder="Busque sua comida preferida"
+              style="width: 400px;" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+        </ul>
+      </div>
+  </header>
+  <main>
+    <section class="container mt-5 container_produto">
+      <div class="row">
+        {% for produto in produtos %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100 shadow-sm border-0 rounded-4">
+            {% if produto.imagem_base64 %}
+            <img src="data:image/jpeg;base64,{{ produto.imagem_base64 }}" class="card-img-top rounded-top-4"
+              alt="{{ produto.nome }}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ produto.nome }}</h5>
+              <p class="text-muted mb-1">{{ produto.restaurante }}</p>
+              <p class="card-text"><strong>Categoria:</strong> {{ produto.categoria }}</p>
+              <p class="card-text">{{ produto.descricao }}</p>
+              <h6 class="text-danger fw-bold">R$ {{ produto.valor }}</h6>
+            </div>
+            <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">
+              <form action="/add_cart" method="POST">
+                <input type="hidden" name="name" value="{{ produto.nome }}">
+                <input type="hidden" name="valor" value="{{ produto.valor }}">
+                <button type="submit" class="btn btn-outline-danger w-100 rounded-pill">Adicionar</button>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+
+  </main>
+  <div>
+    <a href="/carrinho" class="btn-carrinho" title="Ver carrinho">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24">
+        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 
+        0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 
+        2-2-.9-2-2-2zM7.16 14h9.42c.75 0 1.41-.41 
+        1.75-1.03l3.58-6.49A1 1 0 0 0 21 5H5.21l-.94-2H1v2h2l3.6 
+        7.59-1.35 2.45C4.52 15.37 5.48 17 7 17h12v-2H7.42c-.14 
+        0-.25-.11-.25-.25l.03-.12L7.16 14z"/>
+      </svg>
+    </a>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
