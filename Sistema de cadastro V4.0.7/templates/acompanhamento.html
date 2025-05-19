@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Acompanhar Pedido</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #d10000;
+      font-weight: bold;
+    }
+
+    .timeline {
+      margin-top: 30px;
+      border-left: 4px solid #d10000;
+      padding-left: 20px;
+    }
+
+    .step {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      left: -32px;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      background-color: #ccc;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    .step.completed::before {
+      background-color: #d10000;
+    }
+
+    .step h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .step small {
+      color: #888;
+    }
+
+    .step p {
+      margin: 5px 0 0;
+    }
+
+    .entrega {
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .entrega span {
+      font-weight: bold;
+    }
+
+    .restaurante {
+      font-size: 18px;
+      margin-top: 10px;
+      color: #333;
+    }
+
+    .destaque {
+      color: #d10000;
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Nham-Nham Sistema de entregas</h2>
+  <div class="restaurante">Detalhes do pedido</div>
+
+  <div class="entrega">
+    <span>Previsão de entrega:</span> {{ previsao_entrega }}
+  </div>
+
+  <div class="timeline">
+    <div class="step {% if status in ['realizado', 'confirmado', 'pronto'] %}completed{% endif %}">
+      <h4>Realizado <small>{{ horario_realizado }}</small></h4>
+      <p>Seu pedido está sendo confirmado com o restaurante.</p>
+    </div>
+
+    <div class="step {% if status in ['confirmado', 'pronto'] %}completed{% endif %}">
+      <h4>Confirmado</h4>
+      <p>O restaurante está preparando seu pedido.</p>
+    </div>
+
+    <div class="step {% if status == 'pronto' %}completed{% endif %}">
+      <h4>Pronto</h4>
+      <p>O pedido sairá para entrega em breve.</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 30px;">Algo errado com o seu pedido?
+    <a href="/contato" class="destaque">Entre em contato conosco!</a>
+  </p>
+</div>
+
+</body>
+</html>

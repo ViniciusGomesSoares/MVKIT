@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - iFood</title>
+    <link rel="stylesheet" href="../static/carrinho.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/logo2.png">
+</head>
+<body>
+    <div class="carrinho-container">
+        
+        <header class="carrinho-header">
+            <a href="#" class="voltar-btn">‹</a>
+            <h1>Seu carrinho</h1>
+            <div class="itens-count">2 itens</div>
+        </header>
+
+      
+        <section class="restaurante-info">
+            <img src="../static/zé da esquina.png" alt="Tilápia Crocante" class="restaurante-logo">
+            <div>
+                <h2 class="restaurante-nome">Tilápia Crocante</h2>
+                <p class="restaurante-endereco">Av. Paulista, 1000 - 40-50 min • Grátis</p>
+            </div>
+        </section>
+
+    
+        <section class="itens-carrinho">
+            <div class="item">
+                <img src="../static/Tilapia crocante2.png" alt="Tilápia Crocante" class="item-img">
+                <div class="item-info">
+                    <h3>Peixinho gostoso com pura crocancia</h3>
+                    <p class="item-desc">Com risoto de limão siciliano</p>
+                    <div class="item-controle">
+                        <span class="item-preco">R$ 49,90</span>
+                        <div class="quantidade-controle">
+                            <button class="qtd-btn menos">-</button>
+                            <span class="qtd-value">1</span>
+                            <button class="qtd-btn mais">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <img src="../static/batata frita grande.png" alt="Batata Frita" class="item-img">
+                <div class="item-info">
+                    <h3>Batata Frita Grande</h3>
+                    <p class="item-desc">Com maionese da casa</p>
+                    <div class="item-controle">
+                        <span class="item-preco">R$ 10,90</span>
+                        <div class="quantidade-controle">
+                            <button class="qtd-btn menos">-</button>
+                            <span class="qtd-value">1</span>
+                            <button class="qtd-btn mais">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="cupom-section">
+            <div class="cupom-input">
+                <span>🎁</span>
+                <input type="text" placeholder="Adicionar cupom">
+                <button>Aplicar</button>
+            </div>
+        </section>
+
+        
+        <section class="resumo-pedido">
+            <h2 class="resumo-titulo">Resumo do pedido</h2>
+            <div class="resumo-linha">
+                <span>Subtotal</span>
+                <span>R$ 60,80</span>
+            </div>
+            <div class="resumo-linha">
+                <span>Taxa de entrega</span>
+                <span>R$ 5,90</span>
+            </div>
+            <div class="resumo-linha total">
+                <span>Total</span>
+                <span>R$ 66,70</span>
+            </div>
+        </section>
+
+        
+        <footer class="carrinho-footer">
+            <div class="total-container">
+                <span class="total-label">Total</span>
+                <span class="total-value">R$ 66,70</span>
+            </div>
+            <button class="finalizar-btn">Finalizar pedido</button>
+        </footer>
+    </div>
+</body>
+</html>

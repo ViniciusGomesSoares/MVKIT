@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil restaurante</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="../static/perfiladm.css">
+</head>
+<body>
+    {% include 'base_adm_profile.html' %}
+<main>
+<section>
+   <div class="mb-4 border-b border-gray-200 dark:border-gray-700" id="tab_container">
+      <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" role="tablist">
+          <li class="me-2" role="presentation">
+              <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-styled-tab" data-tabs-target="#styled-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+          </li>
+          <li class="me-2" role="presentation">
+              <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-styled-tab" data-tabs-target="#styled-dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Painel de vendas</button>
+          </li>
+          <li class="me-2" role="presentation">
+              <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-styled-tab" data-tabs-target="#styled-settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Configurações</button>
+          </li>
+          <li role="presentation">
+              <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="contacts-styled-tab" data-tabs-target="#styled-contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">Mensagens</button>
+          </li>
+      </ul>
+   </div>
+<div id="default-styled-tab-content">
+   <div class="hidden p-4 rounded-lg" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
+    <legend>
+        <div class="relative w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 mx-auto">
+            <img class="w-full h-full rounded-full" src="{{imagem_url}}" alt="Rounded avatar">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <label for="dropzone-file" class="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 border-4 border-gray-300 border-dashed rounded-full bg-gray-50 hover:bg-gray-100 cursor-pointer">
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-8 md:h-8 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                    </svg>
+                </label>
+                <form action="/cad_image" method="post" enctype="multipart/form-data">
+                    <input id="dropzone-file" name="file_img" type="file" class="hidden" />
+                
+            </div>
+        </div>
+        <div class="mt-4 text-center">
+            <button style="background-color: orange; color: white; border-radius: 5px; padding: 10px; cursor: pointer;" type="submit">Enviar</button></form>
+        </div>
+    </legend>
+         <br><br>
+         <section>
+            <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed  dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="Seu email é: {{email}}" disabled>
+         </section>
+         <section class="form_container w-full">
+            <form action="/cad_restaurante" method="post">
+                <div class="grid gap-6 mb-6 md:grid-cols-2 w-full">
+                    <div>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Nome do seu restaurante</label>
+                        <input type="text" id="first_name" name="nome" class=" border border-gray-300 text-black-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ex: Burger King, MC Donalds, KFC..." required />
+                    </div>
+                    <br>
+                    <div>
+                        <label for="endereco" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Endereço</label>
+                        <input type="text" id="last_name" name="endereco" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ex: São Paulo, AV. Paulista, 29" required />
+                    </div>  
+                    <br>
+                    <div>
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Telefone</label>
+                        <input type="tel" id="phone" name="phone" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="11999999999"  required maxlength="11" minlength="11"/>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Website URL</label>
+                        <input type="text" id="website" name="url" class=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="/minhaloja" required />
+                    </div>
+                </div>
+                <div class="flex items-start mb-6">
+                    <div class="flex items-center h-5">
+                    <input id="remember" type="checkbox" value="" class="checkbox w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
+                    </div>
+                    <label for="remember" class="ms-2 text-sm font-medium text-gray dark:text-gray-800">Eu concordo com os <a href="#" class="text-red-600 hover:underline dark:text-red-500">termos e condições</a>.</label>
+                </div>
+                <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Enviar informações</button>
+            </form>
+            </section>
+   </div>
+   <div class="hidden p-4 rounded-lg" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+       
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+   <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+       <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+           <tr>
+               <th scope="col" class="px-6 py-3 bg-red-50 dark:bg-red-800 dark:text-white">
+                   Nome do usuario
+               </th>
+               <th scope="col" class="px-6 py-3">
+                   Endereço
+               </th>
+               <th scope="col" class="px-6 py-3 bg-red-50 dark:bg-red-800 dark:text-white">
+                   Numero do pedido
+               </th>
+               <th scope="col" class="px-6 py-3">
+                   Preço
+               </th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr class="border-b border-gray-200 dark:border-gray-700">
+               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-red-50 dark:text-white dark:bg-red-800">
+                   Vinicius Junior
+               </th>
+               <td class="px-6 py-4">
+                   São Paulo, Av.Paulista, 667
+               </td>
+               <td class="px-6 py-4 bg-gray-50 dark:bg-red-800 dark:text-white">
+                   #101010
+               </td>
+               <td class="px-6 py-4">
+                   R$29,90
+               </td>
+           </tr>
+           <tr class="border-b border-gray-200 dark:border-gray-700">
+               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-red-50 dark:text-white dark:bg-red-800">
+                   Thiago Felix
+               </th>
+               <td class="px-6 py-4">
+                   Paraná, Piribinha, 333
+               </td>
+               <td class="px-6 py-4 bg-gray-50 dark:bg-red-800 dark:text-white">
+                   #693422
+               </td>
+               <td class="px-6 py-4">
+                   R$40,90
+               </td>
+           </tr>
+           <tr class="border-b border-gray-200 dark:border-gray-700">
+               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-red-50 dark:text-white dark:bg-red-800">
+                   Matheus Geraldi
+               </th>
+               <td class="px-6 py-4">
+                   Tocantins, Pompeia, 190
+               </td>
+               <td class="px-6 py-4 bg-gray-50 dark:bg-red-800 dark:text-white">
+                   #524521
+               </td>
+               <td class="px-6 py-4">
+                   R$99
+               </td>
+           </tr>
+           <tr class="border-b border-gray-200 dark:border-gray-700">
+               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-red-50 dark:text-white dark:bg-red-800">
+                   Memphis Dela-party
+               </th>
+               <td class="px-6 py-4">
+                   São Paulo, Arena neo quimica
+               </td>
+               <td class="px-6 py-4 bg-gray-50 dark:bg-red-800 dark:text-white">
+                   #991000
+               </td>
+               <td class="px-6 py-4">
+                   R$799
+               </td>
+           </tr>
+       </tbody>
+   </table>
+</div>
+
+   </div>
+   <div class="hidden p-4 rounded-lg" id="styled-settings" role="tabpanel" aria-labelledby="settings-tab">
+      <div class="p-6 bg-white rounded-lg shadow-md">
+         <h2 class="text-xl font-semibold text-gray-800 mb-4">Configurações</h2>
+     
+         <div class="space-y-4">
+             <div class="flex items-center justify-between">
+                 <span class="text-gray-600">Ativar Notificações</span>
+                 <button onclick="toggleSwitch(this)" class="relative inline-flex items-center h-6 rounded-full w-11">
+                     <input type="checkbox" id="toggle-notifications" class="sr-only" />
+                     <div class="toggle-path bg-gray-200 w-11 h-6 rounded-full"></div>
+                     <div class="toggle-circle absolute w-4 h-4 bg-white rounded-full transition transform duration-200 ease-in-out"></div>
+                 </button>
+             </div>
+             <div class="flex items-center justify-between">
+                 <span class="text-gray-600">Modo Escuro</span>
+                 <button onclick="toggleSwitch(this)" class="relative inline-flex items-center h-6 rounded-full w-11">
+                     <input type="checkbox" id="toggle-dark-mode" class="sr-only" />
+                     <div class="toggle-path bg-gray-200 w-11 h-6 rounded-full"></div>
+                     <div class="toggle-circle absolute w-4 h-4 bg-white rounded-full transition transform duration-200 ease-in-out"></div>
+                 </button>
+             </div>
+     
+             <div class="flex items-center justify-between">
+                 <span class="text-gray-600">Modo Noturno</span>
+                 <button onclick="toggleSwitch(this)" class="relative inline-flex items-center h-6 rounded-full w-11">
+                     <input type="checkbox" id="toggle-night-mode" class="sr-only" />
+                     <div class="toggle-path bg-gray-200 w-11 h-6 rounded-full"></div>
+                     <div class="toggle-circle absolute w-4 h-4 bg-white rounded-full transition transform duration-200 ease-in-out"></div>
+                 </button>
+             </div>
+         </div>
+     </div>
+   </div>
+   <div class="hidden p-4 rounded-lg" id="styled-contacts" role="tabpanel" aria-labelledby="contacts-tab">
+       
+   </div>
+</div>
+</section>
+</main>
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("default-sidebar");
+        const toggleButton = document.querySelector("[data-drawer-toggle='default-sidebar']");
+    
+        toggleButton.addEventListener("click", function () {
+            sidebar.classList.toggle("-translate-x-full");
+        });
+    });
+   document.querySelectorAll('[role="tab"]').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('[role="tab"]').forEach(btn => {
+        btn.classList.remove('text-red-600', 'border-red-600', 'dark:text-red-500', 'dark:border-red-500');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('text-red-600', 'border-red-600', 'dark:text-red-500', 'dark:border-red-500');
+      tab.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('[role="tabpanel"]').forEach(content => {
+        content.classList.add('hidden');
+      });
+      const target = document.querySelector(tab.getAttribute('data-tabs-target'));
+      target.classList.remove('hidden');
+    });
+  });
+  
+  function toggleSwitch(button) {
+        const circle = button.querySelector('.toggle-circle');
+        const input = button.querySelector('input');
+        const path = button.querySelector('.toggle-path');
+        input.checked = !input.checked;
+        if (input.checked) {
+            circle.classList.add('translate-x-5'); 
+            path.classList.add('bg-blue-500'); 
+            path.classList.remove('bg-gray-200'); 
+        } else {
+            circle.classList.remove('translate-x-5'); 
+            path.classList.remove('bg-blue-500');
+            path.classList.add('bg-gray-200'); 
+        }
+    }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sacola - Pagamento</title>
+  <link rel="stylesheet" href="../static/telaPagamento.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="top-bar">
+      <a href="/"><button class="back">&larr;</button></a>
+      <h1>Sacola</h1>
+      <button class="clear">Limpar</button>
+    </header>
+
+    <section class="restaurant">
+      <h2>Nham-Nham Restaurantes</h2>
+      <p class="delivery-time">Hoje, 40 - 50 min</p>
+    </section>
+    
+    <section class="delivery-box">
+      <div class="delivery-info">
+        <span class="label">Padrão</span>
+        <span class="time">Hoje, 40 - 50 min</span>
+        <span class="free">Grátis</span>
+      </div>
+    </section>
+    
+    <section class="coupon">
+      <span>Cupons</span>
+      <span class="small">14 bloqueados nesse pedido</span>
+      <a href="#">Ver</a>
+    </section>
+    
+    <section class="summary">
+      <div class="line">
+        <span>Subtotal</span>
+        <span>R$ {{ "%.2f"|format(subtotal) }}</span>
+      </div>
+      <div class="line">
+        <span>Taxa de entrega</span>
+        <span class="free">Grátis</span>
+      </div>
+      <div class="line total">
+        <strong>Total</strong>
+        <strong>R$ {{ "%.2f"|format(total) }}</strong>
+      </div>
+    </section>
+    
+
+    <section class="options">
+      <div class="option">
+        <div>
+          <img src="https://cdn-icons-png.flaticon.com/512/633/633611.png" alt="Pagamento" />
+          <span>Formas de pagamento</span>
+        </div>
+        <a href="/cartao">Escolher</a>
+      </div>
+
+      <div class="option">
+        <span>CPF/CNPJ na nota</span>
+        <a href="#">Escolher</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+        <form action="/finalizar_pedido" method="POST">
+          <button type="submit" class="pay-button">Prosseguir com pagamento</button>
+        </form>
+    </footer>
+    
+    
+    
+  </div>
+</body>
+</html>

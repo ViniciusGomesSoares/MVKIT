@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alterar Status</title>
+  <style>
+    body { 
+        font-family: Arial, sans-serif; 
+        padding: 20px; 
+        background: #f0f2f5; }
+    .grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+        gap: 20px; }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Alterar Status do Pedido</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Recebido</h3>
+      <button onclick="alert('Status alterado para Recebido')">Alterar</button>
+    </div>
+    <div class="card">
+      <h3>Em Preparo</h3>
+      <button onclick="alert('Status alterado para Em Preparo')">Alterar</button>
+    </div>
+    <div class="card">
+      <h3>Saiu para Entrega</h3>
+      <button onclick="alert('Status alterado para Saiu para Entrega')">Alterar</button>
+    </div>
+    <div class="card">
+      <h3>Entregue</h3>
+      <button onclick="alert('Status alterado para Entregue')">Alterar</button>
+    </div>
+  </div>
+</body>
+</html>
