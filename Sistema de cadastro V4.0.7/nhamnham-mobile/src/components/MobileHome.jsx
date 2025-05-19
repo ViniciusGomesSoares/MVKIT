@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Cadastro from './Cadastro';
 import '../style.css';
 
 import sushiImg from './img/sushi.png';
 import labonatti from './img/pizzaria-labonatti.jpg';
 import hamburguer from './img/casa-do-hamburguer.png';
 
-// Sample data - replace with real API data
 const sampleRestaurants = [
   { id: 1, name: 'Pizzaria La Bonatti', cuisine: 'Pizza', image: labonatti, rating: 4.5, deliveryTime: '30-40 min' },
   { id: 2, name: 'Casa do Hamburguer', cuisine: 'Burger', image: hamburguer, rating: 4.2, deliveryTime: '20-30 min' },
@@ -17,9 +17,9 @@ const sampleRestaurants = [
 export default function MobileHome() {
   const [searchTerm, setSearchTerm] = useState('');
   const [restaurants, setRestaurants] = useState(sampleRestaurants);
+  const [showCadastro, setShowCadastro] = useState(false);
 
   useEffect(() => {
-    // TODO: fetch restaurants from API
     setRestaurants(
       sampleRestaurants.filter(r =>
         r.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -27,6 +27,10 @@ export default function MobileHome() {
       )
     );
   }, [searchTerm]);
+
+  if (showCadastro) {
+    return <Cadastro onBack={() => setShowCadastro(false)} />;
+  }
 
   return (
     <div className="container">
@@ -75,9 +79,13 @@ export default function MobileHome() {
       </main>
 
       <nav className="bottom-nav">
-        <button className="nav-button active">Home</button>
+        <button className="nav-button active" onClick={() => setShowCadastro(false)}>
+          Home
+        </button>
         <button className="nav-button">Pedidos</button>
-        <button className="nav-button">Favoritos</button>
+        <button className="nav-button" onClick={() => setShowCadastro(true)}>
+          Cadastro
+        </button>
         <button className="nav-button">Perfil</button>
       </nav>
     </div>
