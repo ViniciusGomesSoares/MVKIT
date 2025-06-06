@@ -1,0 +1,235 @@
+#profile {
+    position: relative;
+    padding: 40px;
+}/* From Uiverse.io by Admin12121 */ 
+.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    cursor: default;
+    width: 22em;
+    max-width: 80%;
+    padding: 2em 0;
+    background: #FFF;
+    box-shadow: 0 0 6px 0 rgba(32, 32, 36, 0.12);
+    transition: all 0.35s ease;
+  }
+  
+  .card::before, .card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: orange;
+    height: 4px;
+  }
+  
+  .card::before {
+    width: 0;
+    opacity: 0;
+    transition: opacity 0 ease, width 0 ease;
+    transition-delay: 0.5s;
+  }
+  
+  .card::after {
+    width: 100%;
+    background: white;
+    transition: width 0.5s ease;
+  }
+  
+  .card .content {
+    width: 18em;
+    max-width: 80%;
+  }
+  
+  .card .logo {
+    margin: 0 0 1em;
+    width: 10.625em;
+    transition: all 0.35s ease;
+  }
+  
+  .card .h6 {
+    color: #999;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 2px;
+  }
+  
+  .card .hover_content {
+    overflow: hidden;
+    max-height: 0;
+    transform: translateY(1em);
+    transition: all 0.55s ease;
+  }
+  
+  .card .hover_content p {
+    margin: 1.5em 0 0;
+    color: #6E6E70;
+    line-height: 1.4em;
+  }
+  
+  .card:hover {
+    width: 24em;
+    box-shadow: 0 10px 20px 0 rgba(32, 32, 36, 0.12);
+  }
+  
+  .card:hover::before {
+    width: 100%;
+    opacity: 1;
+    transition: opacity 0.5s ease, width 0.5s ease;
+    transition-delay: 0;
+  }
+  
+  .card:hover::after {
+    width: 0;
+    opacity: 0;
+    transition: width 0 ease;
+  }
+  
+  .card:hover .logo {
+    margin-bottom: 0.5em;
+  }
+  
+  .card:hover .hover_content {
+    max-height: 30em;
+    transform: none;
+  }
+  /* From Uiverse.io by boryanakrasteva */ 
+.btn {
+    background-color: transparent;
+    position: relative;
+    border: none;
+    left: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .btn::after {
+    content: 'delete';
+    position: absolute;
+    top: -130%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(168, 7, 7);
+    padding: 4px 8px;
+    border-radius: 5px;
+    transition: .2s linear;
+    transition-delay: .2s;
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .icon {
+    transition: .2s linear;
+  }
+  
+  
+  .btn:hover > .icon path {
+    fill: rgb(168, 7, 7);
+  }
+  
+  .btn:hover::after {
+    visibility: visible;
+    opacity: 1;
+    top: -160%;
+  }
+  
+  /* From Uiverse.io by boryanakrasteva */ 
+.btn2 {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border: none;
+    position: absolute;
+    border-radius: 3px;
+    
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
+    transition-delay: .2s;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: space-between;
+    right: 50px;
+    bottom: 10px;
+  }
+  
+  .btn2:hover {
+    width: 150px;
+    transition-delay: .2s;
+    background-color: rgb(228, 37, 37);
+    .icon path {
+        stroke: white;
+      }
+  }
+  
+  .btn2:hover > .paragraph {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition-delay: .4s;
+    transition-delay: .4s;
+  }
+  
+  .btn2:hover > .icon-wrapper .icon {
+    transform: scale(1.1);
+  }
+  
+  .bnt2:hover > .icon-wrapper .icon path {
+    stroke: black;
+  }
+  
+  .paragraph {
+    color: rgb(255, 255, 255);
+    visibility: hidden;
+    opacity: 0;
+    font-size: 15px;
+    margin-right: 20px;
+    padding-left: 20px;
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .icon-wrapper {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon {
+    transform: scale(.9);
+    transition: .2s linear;
+  }
+  
+  .icon path {
+    stroke: #000;
+    stroke-width: 2px;
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
+  }
+  

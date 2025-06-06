@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Opções de Entrega</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cards_frete.css') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/logo2.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="frete-container">
+        <h2><i class="fas fa-truck"></i> Opções de entrega</h2>
+
+        <form method="POST">
+            {% for frete in fretes %}
+            <div class="frete-card {% if frete.selecionado %}selecionado{% endif %}">
+                <label>
+                    <input type="radio" name="frete" value="{{ frete.nome }}" 
+                        {% if frete.selecionado %}checked{% endif %} 
+                        onclick="this.form.submit()">
+                    <div class="frete-left">
+                        <h3>{{ frete.nome }}</h3>
+                        <p class="frete-tempo">
+                            {% if frete.nome == "Retirar no local" %}
+                                <i class="fas fa-store"></i> Pronto em {{ frete.tempo }} min
+                            {% else %}
+                                <i class="far fa-clock"></i> {{ frete.tempo }} min
+                            {% endif %}
+                        </p>
+                        <p class="frete-desc">{{ frete.descricao }}</p>
+                    </div>
+                    <div class="frete-right">
+                        <span class="{{ 'gratis' if frete.preco == 0 else '' }}">
+                            {% if frete.preco == 0 %}
+                                Grátis
+                            {% else %}
+                                R$ {{ "%.2f"|format(frete.preco) }}
+                            {% endif %}
+                        </span>
+                    </div>
+                </label>
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+</body>
+</html>

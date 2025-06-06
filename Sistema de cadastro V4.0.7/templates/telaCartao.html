@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento</title>
+  <style>
+    
+    body { 
+        font-family: Arial, sans-serif; 
+        padding: 20px; 
+        background: #f9f9f9; 
+    }
+    .container { 
+        max-width: 500px; 
+        margin: auto; 
+        background: #fff; 
+        padding: 20px; 
+        border-radius: 10px; 
+    }
+    label { 
+        
+        display: block; 
+        
+        margin-top: 15px; 
+    
+    }
+    input, select { 
+        width: 100%; 
+        padding: 10px; 
+        margin-top: 5px; 
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+    }
+    button { 
+        margin-top: 20px; 
+        width: 100%; 
+        padding: 10px; 
+        background: #28a745; 
+        color: #fff; 
+        border: none; 
+        border-radius: 5px; 
+        cursor: pointer; 
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form action="/salvarCard" method="POST" onsubmit="return validarFormulario()">
+      <h2>Pagamento</h2>
+  
+      <!-- Nome no cartão -->
+      <label for="nome_cartao">Nome no cartão</label>
+      <input type="text" 
+             name="nome_cartao" 
+             id="nome_cartao" 
+             placeholder="Ex: Matheus Geraldi" 
+             required 
+             pattern="^[A-Za-zÀ-ÿ\s]{5,40}$" 
+             maxlength="40"
+             title="Nome deve conter apenas letras e espaços, entre 5 e 40 caracteres.">
+  
+      <!-- Número do cartão -->
+      <label for="numero_cartao">Número do cartão</label>
+      <input type="text" 
+             name="numero_cartao" 
+             id="numero_cartao" 
+             placeholder="XXXX-XXXX-XXXX-XXXX" 
+             required 
+             pattern="^\d{16}$" 
+             inputmode="numeric"
+             maxlength="16"
+             title="Informe exatamente 16 números, sem espaços.">
+  
+      <!-- Validade -->
+      <label for="validade_cartao">Data de validade</label>
+      <input type="month" 
+             name="validade_cartao" 
+             id="validade_cartao" 
+             required 
+             title="Selecione uma data futura.">
+  
+      <!-- CVV -->
+      <label for="cvv">CVV</label>
+      <input type="text" 
+             name="cvv" 
+             id="cvv" 
+             placeholder="123" 
+             required 
+             pattern="^\d{3}$" 
+             maxlength="3"
+             inputmode="numeric"
+             title="Informe os 3 dígitos do código de segurança.">
+  
+      <!-- Forma de pagamento -->
+      <label for="forma_pagamento">Forma de pagamento</label>
+      <select name="forma_pagamento" id="forma_pagamento" required>
+        <option value="" disabled selected>Selecione...</option>
+        <option value="crédito">Cartão de crédito</option>
+        <option value="débito">Cartão de débito</option>
+      </select>
+  
+      <button type="submit">Salvar Cartão</button>
+    </form>
+  </div>
+  
+  <script>
+    function validarFormulario() {
+      const validadeInput = document.getElementById('validade_cartao');
+      const validade = new Date(validadeInput.value + "-01");
+      const hoje = new Date();
+      hoje.setDate(1); // força início do mês
+    
+      if (validade < hoje) {
+        alert("A validade do cartão deve estar no futuro.");
+        return false;
+      }
+    
+      return true;
+    }
+    </script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Local</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/form_cad_local.css">
+    <link rel="stylesheet" href="/static/card.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/logo2.png">
+
+</head>
+
+<body>
+<!-- From Uiverse.io by mihocsaszilard --> 
+<div class="containerback"></div>
+
+
+<div class="card">
+    <div class="tools">
+      <div class="circle">
+        <span class="red box"></span>
+      </div>
+      <div class="circle">
+        <span class="yellow box"></span>
+      </div>
+      <div class="circle">
+        <span class="green box"></span>
+      </div>
+    </div>
+    <div class="card__content">
+        <div class="boxEnd" style="z-index: 1070;">
+
+            <div class="" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" class="pop_content" style="width: 600px;">
+                        <div class="header">
+                            <h1 class="title " id="staticBackdropLabel" style="text-align: center;">Meus dados</h1>
+                        </div>
+                        <div class="modal-body">
+                            <div class="containerEndereco">
+                                <form action="/endereco" method="post">
+                                    <div style="margin-bottom: 16px;">
+                                        <div class="info-input">
+                                            <label for="">Nome: <br>
+                                                <input name="name" type="text" id="name" value="" placeholder="Seu Armando"
+                                                    required /></label>
+    
+                                            <label for="">CPF: <br>
+                                                <input name="cpf" type="text" id="cpf" maxlength="11" minlength="11"
+                                                    value="" placeholder="000.000.000.00" required /></label>
+    
+                                            <label for="">CEP: <br>
+                                                <input name="cep" type="text" id="cep" value="" size="20" minlength="8"
+                                                    maxlength="8" onblur="pesquisacep(this.value);" placeholder="00000-000"
+                                                    required /></label>
+                                        </div>
+    
+                                        <div class="container box_endereco ">
+                                            <label for="">Bairro: <br>
+                                                <input name="bairro" type="text" id="bairro" size="20"
+                                                    placeholder="Ex: Times Square" required /></label><br><br>
+    
+                                            <label for="">Rua: <br>
+                                                <input name="rua" type="text" id="rua" size="20"
+                                                    placeholder="Ex: Rua da praça" required /></label><br><br>
+    
+                                            <label for="" style="margin-top: 16px;">Cidade: <br>
+                                                <input type="text" name="cidade" id="cidade" maxlength="20"
+                                                    placeholder="Ex: Osasco" required></label><br><br>
+                                            <div class="uf-nuber flex-1">
+                                                <label for="">Estado: <br>
+                                                    <input name="uf" type="text" id="uf" maxlength="2" placeholder="Ex: SP"
+                                                        required /></label><br><br>
+    
+                                                <label for="">Numero: <br>
+                                                    <input type="text" name="number" id="number" maxlength="5"
+                                                        placeholder="" required></label><br><br>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+                                    <div class="flex-2">
+                                        <button type="submit" class="btn submit">Salvar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+  </div>
+    
+
+    <div class="toast" id="cep-toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+        <div class="toast-header">
+            <img src="" class="rounded me-2" alt="">
+            <strong class="me-auto">Erro de CEP</strong>
+            <small>Aviso</small>
+            <button type="button" class="btn-close" id="close-toast" data-bs-dismiss="toast"
+                aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            CEP inválido. Por favor, insira um CEP válido.
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        $('[name="estado"]').click(function () {
+
+            $('[name="cidades"] option').css('display', 'none');
+
+            $('[name="cidades"] .' + $(this).val()).css('display', '');
+
+        });
+
+        function limpa_formulário_cep() {
+            document.getElementById('rua').value = ("");
+            document.getElementById('bairro').value = ("");
+            document.getElementById('cidade').value = ("");
+            document.getElementById('uf').value = ("");
+        }
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                document.getElementById('rua').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+                document.getElementById('cidade').value = (conteudo.localidade);
+                document.getElementById('uf').value = (conteudo.uf);
+            }
+            else {
+                limpa_formulário_cep();
+                var toastElement = document.getElementById('cep-toast');
+                toastElement.style.display = 'block';
+                var toast = new bootstrap.Toast(toastElement);
+                toast.show();
+            }
+        }
+
+        function pesquisacep(valor) {
+            var cep = valor.replace(/\D/g, '');
+
+            if (cep != "") {
+                var validacep = /^[0-9]{8}$/;
+                if (validacep.test(cep)) {
+                    document.getElementById('rua').value = "...";
+                    document.getElementById('bairro').value = "...";
+                    document.getElementById('cidade').value = "...";
+                    document.getElementById('uf').value = "...";
+
+                    var script = document.createElement('script');
+                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                    document.body.appendChild(script);
+
+                }
+                else {
+                    limpa_formulário_cep();
+                    var toastElement = document.getElementById('cep-toast');
+                    toastElement.style.display = 'block';
+                    var toast = new bootstrap.Toast(toastElement);
+                    toast.show();
+                }
+            }
+            else {
+                limpa_formulário_cep();
+            }
+        };
+        document.getElementById('close-toast').addEventListener('click', function () {
+            var toastElement = document.getElementById('cep-toast');
+            toastElement.style.display = 'none';
+        });
+        let valor = input.value.replace(/\D/g, '');
+        document.getElementById('#cpf') = valor;
+    </script>
+</body>
+
+</html>

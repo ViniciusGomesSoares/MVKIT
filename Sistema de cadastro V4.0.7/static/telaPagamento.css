@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+  body {
+    background: #fff;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: auto;
+    padding: 16px;
+    padding-top: 150px;
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .top-bar h1 {
+    font-size: 18px;
+  }
+  
+  .back, .clear {
+    background: none;
+    border: none;
+    color: #EC8A4D;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .restaurant h2 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  
+  .delivery-time {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  
+  .delivery-box {
+    border: 1px solid #EC8A4D;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .delivery-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .label {
+    color: #EC8A4D;
+    font-weight: bold;
+  }
+  
+  .free {
+    color: green;
+  }
+  
+  .coupon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  
+  .coupon .small {
+    color: #aaa;
+  }
+  
+  .summary .line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  
+  .summary .total {
+    font-size: 16px;
+    margin-top: 8px;
+  }
+  
+  .options .option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid #eee;
+  }
+  
+  .options .option img {
+    width: 20px;
+    margin-right: 8px;
+  }
+  
+  .options .option div {
+    display: flex;
+    align-items: center;
+  }
+  
+  .options a {
+    color: #EC8A4D;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .footer {
+    margin-top: 24px;
+  }
+  
+  .pay-button {
+    background: #EC8A4D;
+    color: white;
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
